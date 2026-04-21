@@ -6,36 +6,6 @@
       "sourceType": "github",
       "computedHash": "91782f423f6fad0fe4e2159350f2eb8c3cf66cfa4d2387b2c8d927d443c9a603"
     },
-    "ckm:banner-design": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "7bbf0f48704f5c40436e3466d7ef9bcbafe35a84eb8c3e9d0ab76408a57bac5c"
-    },
-    "ckm:brand": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "89c8579d232e6e14152a8b898d49eb94f59aa7288ed8ca103cd3b38cb082e00a"
-    },
-    "ckm:design": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "2020e511bb6fbc1dbc233d1da335ec7e8cb553d6e321d34cec4555efcc9ec8f1"
-    },
-    "ckm:design-system": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "49b8308dc428c66b0983f4b3d102c522c495f62538121064d1e82a040b1afd2c"
-    },
-    "ckm:slides": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "6d753831914ed6703b7222153f2710efc2f195f0ab24fd2119c76c2b6d1a6ba1"
-    },
-    "ckm:ui-styling": {
-      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "sourceType": "github",
-      "computedHash": "9ae38e4e201f338b6150e462b98a2db0f2ae7c180c77e8cfb1d33eba9d33bf33"
-    },
     "cmux": {
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
@@ -56,6 +26,16 @@
       "sourceType": "github",
       "computedHash": "5cd75e51d5d576dffcce54abf391165005e6b0f70ab89133f4fe432cc8a00f63"
     },
+    "cohesion": {
+      "source": "toss/frontend-fundamentals",
+      "sourceType": "github",
+      "computedHash": "df9617a46889464780076c40b905eebd320a095a87bd5946ed663b848fb9305c"
+    },
+    "coupling": {
+      "source": "toss/frontend-fundamentals",
+      "sourceType": "github",
+      "computedHash": "2de669a509671c65e0c674ff461dc307033cec457477b644e9c6516e40a86bdd"
+    },
     "feature-sliced-design": {
       "source": "feature-sliced/skills",
       "sourceType": "github",
@@ -71,10 +51,30 @@
       "sourceType": "github",
       "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
     },
+    "predictability": {
+      "source": "toss/frontend-fundamentals",
+      "sourceType": "github",
+      "computedHash": "46eeb9ad76c2adfe1e5ddd336ecd4a064f737f79a68fefa1260e37fab255b366"
+    },
+    "readability": {
+      "source": "toss/frontend-fundamentals",
+      "sourceType": "github",
+      "computedHash": "23adeac7a9041f7a026bb46bb58f0ac56872b02531838c418acac71944a9df2f"
+    },
     "release": {
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
       "computedHash": "5942b70ca8cced64e6a7d5b222d6fa1334af253c00768079fc692cd914503923"
+    },
+    "tanstack-query": {
+      "source": "tanstack-skills/tanstack-skills",
+      "sourceType": "github",
+      "computedHash": "b8a0477cd4d7bf8fa54d27f8e64d82388402f0d502591db50a357df5b9995c75"
+    },
+    "tanstack-query-best-practices": {
+      "source": "deckardger/tanstack-agent-skills",
+      "sourceType": "github",
+      "computedHash": "21d2e8b7468a81d772b6527ad8ca178cc2f3f08af777bb9061333013ee88a0c9"
     },
     "typescript-advanced-types": {
       "source": "wshobson/agents",

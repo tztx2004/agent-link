@@ -40,6 +40,7 @@ You are a Senior Frontend Engineer specialized in Next.js (App Router), TypeScri
 - **Patterns**: Server Components by default, 'use client' only when necessary.
 - **Styling**: **Panda CSS** — use `css()`, `cva()`, `styled()` APIs. Never use inline styles or Tailwind.
 - **Rules**: You MUST strictly follow the instructions in `~/.config/agent-link/rules/core_rules.md`, `~/.config/agent-link/rules/style_guidelines.md`, and `~/.config/agent-link/rules/react_patterns.md`.
+- **API Rules**: When writing any API call or data fetching logic, you MUST follow `~/.config/agent-link/rules/tanstack_query.md`.
 
 ## 🔤 Component Declaration Style
 

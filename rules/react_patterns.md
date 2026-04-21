@@ -4,6 +4,25 @@ Common React patterns enforced across all frontend and refactoring work. These r
 
 ---
 
+## 0. Mandatory Quality Skills (Component Create / Modify / Refactor)
+
+When **creating, modifying, or refactoring** any React component or hook, invoke all four skills sequentially via the `Skill` tool before finalizing the output. Do not skip any of them.
+
+| Order | Skill                         | What it checks                                                                                          |
+| ----- | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 1     | `readability`                 | Nested ternaries, unnamed complex conditions, unclear naming, logic that requires mental translation    |
+| 2     | `predictability`              | Hidden side effects in getters/fetchers, inconsistent function behavior, surprising return values       |
+| 3     | `cohesion`                    | Features spread across multiple directories, magic numbers duplicated, unrelated logic grouped together |
+| 4     | `coupling`                    | Props drilling 3+ layers, hooks with 5+ dependencies, modules that break when another module changes    |
+| 5     | `vercel-composition-patterns` | Boolean prop proliferation, render props, state/UI mixing, compound component structure                 |
+| 6     | `vercel-react-best-practices` | Data-fetching waterfalls, barrel imports, unnecessary re-renders, useEffect misuse, Server Components   |
+
+Apply each skill's findings before moving on to the next. If a skill surfaces violations, fix them inline — do not defer.
+
+Additionally, invoke `vercel-composition-patterns` alongside any best practice skill when the component has boolean props (`isX`, `hasX`), uses render props, or mixes state with UI. This skill enforces compound component patterns, context-based state decoupling, and explicit variant design.
+
+---
+
 ## 1. Declarative Programming Principle
 
 Write code that describes **what** to render, not **how** to control flow.
