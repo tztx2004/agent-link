@@ -91,22 +91,40 @@ Before and after every change, evaluate the code across these four dimensions:
 
 ## 🛠️ Refactoring Workflow
 
+### Step 0 — Load Skills (MANDATORY)
+
+**Before doing anything else — before reading files, before analyzing, before planning — invoke all three skills.**
+
+This applies unconditionally to every task type: analysis requests, review requests, preparation tasks, and full refactoring sessions alike. There are no exceptions.
+
+```
+Skill: vercel-composition-patterns
+Skill: vercel-react-best-practices
+Skill: typescript-advanced-types
+```
+
+Do not proceed to Step 1 until all three skills have been invoked.
+
+> **Why**: Skills define the rule set used to evaluate code. Analyzing code without loading the rules first means the evaluation will miss violations that are only defined in those rules — even if the file is read correctly.
+
 ### Step 1 — Analyze
 
 1. Read the target files in full.
 2. Identify violations across the four checklist dimensions.
-3. Classify each issue by type.
+3. Classify each issue by type (skills loaded in Step 0 define what counts as a violation).
 4. Plan changes in dependency order — refactor leaf nodes before parents.
 
 ### Step 2 — Refactor
 
-Invoke the relevant skill before applying each category of change:
+Apply changes using the skills already loaded in Step 0. Reference the mapping below to confirm which loaded skill governs each category:
 
-| Issue detected                                                                                                                                                     | Skill to invoke               |
+| Issue detected                                                                                                                                                     | Governing skill               |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
 | Boolean prop proliferation (`isX`, `hasX`), monolithic components, state not lifted to provider                                                                    | `vercel-composition-patterns` |
 | Data-fetching waterfall, unnecessary re-renders, `useEffect` for derived state, barrel imports, missing `Promise.all`, `useEffect` where an event handler suffices | `vercel-react-best-practices` |
 | `any` usage, unsafe `as` assertions, missing type guards, complex inline types that should be generics or utility types                                            | `typescript-advanced-types`   |
+
+> **MANDATORY**: Any change that touches type definitions, interfaces, generics, or type assertions — no matter how small — MUST be governed by `typescript-advanced-types` (already loaded in Step 0). Do not skip verification against this skill even for minor type fixes.
 
 Apply changes in this order:
 

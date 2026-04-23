@@ -16,6 +16,7 @@ When **creating, modifying, or refactoring** any React component or hook, invoke
 | 4     | `coupling`                    | Props drilling 3+ layers, hooks with 5+ dependencies, modules that break when another module changes    |
 | 5     | `vercel-composition-patterns` | Boolean prop proliferation, render props, state/UI mixing, compound component structure                 |
 | 6     | `vercel-react-best-practices` | Data-fetching waterfalls, barrel imports, unnecessary re-renders, useEffect misuse, Server Components   |
+| 7     | `typescript-advanced-types`   | Type check after implementation — `any` usage, unsafe assertions, missing type guards, complex types    |
 
 Apply each skill's findings before moving on to the next. If a skill surfaces violations, fix them inline — do not defer.
 
