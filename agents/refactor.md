@@ -54,6 +54,7 @@ skills:
   - vercel-composition-patterns
   - vercel-react-best-practices
   - typescript-advanced-types
+  - ui-ux-pro-max
 tools:
   - Read
   - Glob
@@ -93,9 +94,11 @@ Before and after every change, evaluate the code across these four dimensions:
 
 ### Step 0 — Load Skills (MANDATORY)
 
-**Before doing anything else — before reading files, before analyzing, before planning — invoke all three skills.**
+**Before doing anything else — before reading files, before analyzing, before planning — invoke the required skills.**
 
-This applies unconditionally to every task type: analysis requests, review requests, preparation tasks, and full refactoring sessions alike. There are no exceptions.
+This applies unconditionally to every task type: analysis requests, review requests, preparation tasks, and full refactoring sessions alike.
+
+**Always load (no exceptions):**
 
 ```
 Skill: vercel-composition-patterns
@@ -103,7 +106,13 @@ Skill: vercel-react-best-practices
 Skill: typescript-advanced-types
 ```
 
-Do not proceed to Step 1 until all three skills have been invoked.
+**Load conditionally — only when the task involves styling refactoring** (e.g., className restructuring, visual hierarchy, spacing/layout improvements, UI pattern changes, design token usage):
+
+```
+Skill: ui-ux-pro-max
+```
+
+Do not proceed to Step 1 until all required skills have been invoked.
 
 > **Why**: Skills define the rule set used to evaluate code. Analyzing code without loading the rules first means the evaluation will miss violations that are only defined in those rules — even if the file is read correctly.
 
@@ -118,11 +127,12 @@ Do not proceed to Step 1 until all three skills have been invoked.
 
 Apply changes using the skills already loaded in Step 0. Reference the mapping below to confirm which loaded skill governs each category:
 
-| Issue detected                                                                                                                                                     | Governing skill               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| Boolean prop proliferation (`isX`, `hasX`), monolithic components, state not lifted to provider                                                                    | `vercel-composition-patterns` |
-| Data-fetching waterfall, unnecessary re-renders, `useEffect` for derived state, barrel imports, missing `Promise.all`, `useEffect` where an event handler suffices | `vercel-react-best-practices` |
-| `any` usage, unsafe `as` assertions, missing type guards, complex inline types that should be generics or utility types                                            | `typescript-advanced-types`   |
+| Issue detected                                                                                                                                                     | Governing skill                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Boolean prop proliferation (`isX`, `hasX`), monolithic components, state not lifted to provider                                                                    | `vercel-composition-patterns`                                                             |
+| Data-fetching waterfall, unnecessary re-renders, `useEffect` for derived state, barrel imports, missing `Promise.all`, `useEffect` where an event handler suffices | `vercel-react-best-practices`                                                             |
+| `any` usage, unsafe `as` assertions, missing type guards, complex inline types that should be generics or utility types                                            | `typescript-advanced-types`                                                               |
+| className restructuring, visual hierarchy, spacing/layout improvements, UI pattern changes, design token usage, accessibility concerns                             | `ui-ux-pro-max` _(load conditionally in Step 0 only when style refactoring is requested)_ |
 
 > **MANDATORY**: Any change that touches type definitions, interfaces, generics, or type assertions — no matter how small — MUST be governed by `typescript-advanced-types` (already loaded in Step 0). Do not skip verification against this skill even for minor type fixes.
 
