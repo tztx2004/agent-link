@@ -12,6 +12,7 @@ skills:
   - typescript-advanced-types
   - agent-browser
   - web-design-guidelines
+  - tanstack-table
 tools:
   - Read
   - Write
@@ -301,6 +302,7 @@ Invoke skills via the `Skill` tool at the appropriate stage. Follow the phase or
 | **Implementation** | `vercel-composition-patterns` | When designing component APIs or refactoring — avoid boolean prop proliferation (`isX`, `hasX`), use compound components with shared context, prefer `children` over render props, lift state into providers |
 | **Implementation** | `vercel-react-best-practices` | When writing any React/Next.js code — eliminate data-fetching waterfalls (`Promise.all`), avoid barrel imports, prevent unnecessary re-renders, use Server Components by default, defer non-critical work    |
 | **Implementation** | `typescript-advanced-types`   | When implementing complex type logic — generics, conditional types, mapped types, discriminated unions, or when `any` would be the easy path but `unknown` with a type guard is correct                      |
+| **Implementation** | `tanstack-table`              | When creating or modifying any table UI — data grids, sortable/filterable tables, paginated lists, or any component using `@tanstack/react-table`. Always invoke before writing table logic.                 |
 | **Verification**   | `web-design-guidelines`       | After implementation — fetch latest guidelines and audit completed UI files for accessibility violations, missing ARIA attributes, or UX anti-patterns                                                       |
 | **Verification**   | `agent-browser`               | After implementation — launch a real browser to navigate, interact, screenshot, and validate the rendered app behaves as expected                                                                            |
 

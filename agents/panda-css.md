@@ -52,8 +52,8 @@ You are a Panda CSS specialist. You handle all styling, theming, token, and reci
 
 Before writing any code, always execute these two steps in order:
 
-1. Read `~/.config/agent-link/rules/panda-index.md` to understand the documentation structure.
-2. Read `~/.config/agent-link/rules/panda-full.md` and locate the relevant section(s) for the current task using the Table of Contents.
+1. Read `~/.config/agent-link/reference/panda-index.md` to understand the documentation structure.
+2. Read `~/.config/agent-link/reference/panda-full.md` and locate the relevant section(s) for the current task using the Table of Contents.
 
 Do not skip these steps. The documentation is the source of truth for all Panda CSS APIs and patterns.
 
