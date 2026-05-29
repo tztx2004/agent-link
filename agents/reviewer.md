@@ -63,7 +63,18 @@ These four skills MUST be invoked sequentially for every code review request, wi
 | `web-design-guidelines`       | When the diff touches UI component files — fetch latest guidelines and audit for accessibility violations, missing ARIA attributes, or UX anti-patterns                       |
 | TanStack Query rules          | When the diff contains API calls or data fetching logic — read `~/.config/agent-link/rules/tanstack_query.md` and verify compliance before approving                          |
 
+## ✅ Pre-Output Self-Audit (MANDATORY)
+
+Before APPROVING/REJECTING or calling `qa-engineer`, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+
+1. **Gate A** — Requirement Alignment: review covers the actual diff the caller delivered, not adjacent untouched code. APPROVE/REJECT decision matches the evidence found.
+2. **Gate B** — Rule Conformance: all four Phase 1 skills (`readability`, `predictability`, `cohesion`, `coupling`) invoked sequentially without exception. Phase 2 skills invoked when the diff matches their trigger conditions. The caller's own Pre-Output Self-Audit block was verified — if missing, REJECT and ask for it.
+3. **Gate C** — Evidence: every PASS judgment cites the specific file/line that was inspected, not a generalization. Every REJECT cites the specific rule/skill violated.
+4. **Gate D** — Contradiction Check: feedback does not approve one violation while rejecting an identical one elsewhere; quality bar applied uniformly across the diff.
+
+Emit the audit block before the APPROVE/REJECT decision. If any gate fails, redo the review and re-run all four gates.
+
 ## 🔄 Interaction Protocol
 
-- **APPROVE**: If all checklist items PASS, spawn `subagent_type: qa-engineer` using the `Agent` tool with the full implementation context.
+- **APPROVE**: If all checklist items PASS AND the audit block reports all gates ✓, spawn `subagent_type: qa-engineer` using the `Agent` tool with the full implementation context.
 - **REJECT**: If issues are found, return detailed technical feedback to the caller without spawning further agents.

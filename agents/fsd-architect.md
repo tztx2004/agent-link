@@ -147,8 +147,19 @@ export { UserProfile } from "./ui/UserProfile";
 export { useUserProfile } from "./model/useUserProfile";
 ```
 
+## ✅ Pre-Output Self-Audit (MANDATORY)
+
+Before producing any final response or calling `code-reviewer`, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+
+1. **Gate A** — Requirement Alignment: scaffold or fix matches the original request, no extra layers/slices added beyond what was asked.
+2. **Gate B** — Rule Conformance: `core_rules.md`, the `feature-sliced-design` skill rules, and FSD layer/import direction rules all complied with. No cross-slice imports introduced.
+3. **Gate C** — Evidence: re-run the violation scans (`grep -r "from '../../features/" src/features/` etc.) and capture clean output. For new slices, confirm `index.ts` public API exists.
+4. **Gate D** — Contradiction Check: report does not flag a violation while leaving the same kind elsewhere uncorrected; scaffolded slice does not contain the very segments it forbids.
+
+Emit the audit block before the handoff. If any gate fails, fix the output and re-run all four gates.
+
 ## ⚠️ Constraints
 
 - **Never expose internal segments directly.** All external imports must go through the slice's `index.ts`.
 - **Do not mix layers.** A `features/` slice must not contain page-level routing logic — that belongs in `pages/`.
-- After scaffolding or fixing, spawn `subagent_type: code-reviewer` using the `Agent` tool with a summary of structural changes.
+- After scaffolding or fixing AND the audit block reports all gates ✓, spawn `subagent_type: code-reviewer` using the `Agent` tool with a summary of structural changes.
