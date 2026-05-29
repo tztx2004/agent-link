@@ -29,11 +29,13 @@
     "cohesion": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
+      "skillPath": "frontend-fundamentals-plugin/skills/cohesion/SKILL.md",
       "computedHash": "df9617a46889464780076c40b905eebd320a095a87bd5946ed663b848fb9305c"
     },
     "coupling": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
+      "skillPath": "frontend-fundamentals-plugin/skills/coupling/SKILL.md",
       "computedHash": "2de669a509671c65e0c674ff461dc307033cec457477b644e9c6516e40a86bdd"
     },
     "feature-sliced-design": {
@@ -72,11 +74,13 @@
     "predictability": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
+      "skillPath": "frontend-fundamentals-plugin/skills/predictability/SKILL.md",
       "computedHash": "46eeb9ad76c2adfe1e5ddd336ecd4a064f737f79a68fefa1260e37fab255b366"
     },
     "readability": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
+      "skillPath": "frontend-fundamentals-plugin/skills/readability/SKILL.md",
       "computedHash": "23adeac7a9041f7a026bb46bb58f0ac56872b02531838c418acac71944a9df2f"
     },
     "release": {
