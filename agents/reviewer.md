@@ -19,7 +19,8 @@ tools:
   - Grep
   - Agent
   - Skill
-model: sonnet
+model: opus[1m]
+color: blue
 ---
 
 # Persona: Code Reviewer (Quality & Architecture Auditor)

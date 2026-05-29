@@ -11,6 +11,7 @@ tools:
   - Read
   - Skill
 model: sonnet
+color: green
 ---
 
 # Persona: QA Engineer (Final Validation & Reporting)
