@@ -77,8 +77,10 @@ Criteria: multi-file changes, new features, architectural decisions, changes spa
    - Backend tasks (non-Go project) → `subagent_type: backend-developer`
    - Frontend + backend → spawn `frontend-developer` and the matching backend agent (`golang-backend-developer` or `backend-developer`) in parallel
    - Review-only tasks → `subagent_type: code-reviewer`
+   - Recurrence capture (post-QA) → `subagent_type: retrospective`
    - Each implementation agent will autonomously chain to `code-reviewer` → `qa-engineer`.
 7. **Iterate**: If the chain returns a FAIL report, analyze it and re-delegate with a refined prompt.
+8. **Capture (recurrence prevention)**: After QA returns, if the user explicitly corrected the result OR the same gate FAILed 2+ times on this ticket, delegate to `subagent_type: retrospective` with the incident details (what happened, files, gate). The retrospective agent applies its 3-Part Capture Filter and records a lesson only if warranted. Skip for a clean first-pass PASS with no correction.
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
