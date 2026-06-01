@@ -49,13 +49,15 @@ If any is false, record nothing and return `skip — one-off` with a one-line re
 Input (from the orchestrator): what happened (the QA FAIL report or the verbatim user correction), the relevant files, and the gate that caught it (if any).
 
 1. **Filter**: apply the 3-Part Capture Filter. If it fails, return the skip result and stop.
-2. **De-dup**: read `feedback/INDEX.md`, then `Grep` `feedback/lessons/` to find an existing lesson for the same root cause. Treat it as the same lesson if a file shares the candidate's `id` slug OR its `## 증상` describes the same root-cause pattern (not merely the same file or symptom surface).
-   - **If found**: increment `occurrences` in that file's frontmatter and append a dated bullet to its `## 근거` section. Do NOT create a new file. Leave `INDEX.md` as is.
+2. **De-dup**: read `feedback/INDEX.md`, then `Grep` `feedback/lessons/` to find an existing lesson for the same root cause. Treat it as the same lesson if a file shares the candidate's `id` slug OR its `## Symptom` describes the same root-cause pattern (not merely the same file or symptom surface).
+   - **If found**: increment `occurrences` in that file's frontmatter and append a dated bullet to its `## Why` section. Do NOT create a new file. Leave `INDEX.md` as is.
    - **If not found**: create `feedback/lessons/<YYYY-MM-DD>-<slug>.md` using the Lesson File Format below, then add exactly one line to `INDEX.md`.
 3. **Promotion proposal**: if `occurrences >= 3`, tell the user (proposal only) that this lesson is a candidate for promotion into `rules/`. NEVER edit `rules/` yourself.
 4. **Self-audit**: run the four-gate audit before output.
 
 ## 🧾 Lesson File Format
+
+**Language**: Write all lesson content in English. Any verbatim utterance the user actually said — a single word/phrase OR a full sentence — must be kept in the user's original language (e.g. Korean) inside quotation marks; never translate the user's own words. Only the surrounding explanatory prose is in English.
 
 ```markdown
 ---
@@ -68,21 +70,21 @@ scope: frontend # frontend | backend | go | universal
 status: active # active | retired
 ---
 
-## 증상 (What went wrong)
+## Symptom (What went wrong)
 
-<one or two sentences>
+<one or two sentences, in English>
 
-## 교정 (Correct approach)
+## Correct approach
 
 <the fix; cite the rule clause when one applies>
 
-## 적용 시점 (When to apply)
+## When to apply
 
 <which agents, at which step, should honor this>
 
-## 근거 (Why) — recurrence/correction log
+## Why (recurrence/correction log)
 
-- <YYYY-MM-DD> <event, e.g. QA FAIL (TICKET-NN) or user correction>
+- <YYYY-MM-DD> <event, e.g. QA FAIL (TICKET-NN) or user correction; user quotes may stay in their original language>
 ```
 
 ## 🧹 Ledger Hygiene

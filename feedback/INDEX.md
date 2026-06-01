@@ -5,4 +5,4 @@
 > `scope` is one of: frontend | backend | go | universal.
 > Retired or rule-promoted lessons are removed from this list.
 
-<!-- No lessons recorded yet. -->
+- [Don't expand implementation approval into commit consent](lessons/2026-06-01-no-implicit-commit-on-proceed.md) — universal; "진행"/"proceed" grants code changes only; git commit·push only on explicit instruction
