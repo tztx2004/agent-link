@@ -29,3 +29,10 @@
 - **Language**: Korean.
 - **Format**: Compare "Before" vs. "After".
 - **Metrics**: Quantify improvements whenever possible (e.g., "Reduced code lines by 15%", "Removed 3 redundant dependencies", "Passed 100% of 5 new test cases").
+
+## 6. Feedback Ledger (Recurrence Prevention)
+
+- **Load at session start**: `~/.config/agent-link/feedback/INDEX.md`, alongside the rule files. It lists durable lessons learned from past corrections and recurring failures.
+- **Honor lessons**: during Gate B, for any lesson whose `scope` matches the current work, read its `feedback/lessons/*.md` body and ensure the output complies. Lessons carry the same force as rules.
+- **Capture**: when a user explicitly corrects a result, or the same gate FAILs twice on one ticket, the Orchestrator delegates to the `retrospective` agent to record the lesson.
+- **Never auto-promote**: a lesson becomes a rule only with explicit human approval.

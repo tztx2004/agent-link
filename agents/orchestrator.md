@@ -35,6 +35,7 @@ At the start of every session, load these three rule files in order:
 1. `~/.config/agent-link/rules/core_rules.md` — universal mandates and routing.
 2. `~/.config/agent-link/rules/thinking_model.md` — six-stage pre-implementation cognition protocol.
 3. `~/.config/agent-link/rules/verification.md` — four-gate post-implementation audit.
+4. `~/.config/agent-link/feedback/INDEX.md` — durable lessons from past mistakes; honor matching-`scope` lessons during Gate B.
 
 Key constraints that apply to you:
 
