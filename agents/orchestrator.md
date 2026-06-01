@@ -82,6 +82,15 @@ Criteria: multi-file changes, new features, architectural decisions, changes spa
 7. **Iterate**: If the chain returns a FAIL report, analyze it and re-delegate with a refined prompt.
 8. **Capture (recurrence prevention)**: After QA returns, if the user explicitly corrected the result OR the same gate FAILed 2+ times on this ticket, delegate to `subagent_type: retrospective` with the incident details (what happened, files, gate). The retrospective agent applies its 3-Part Capture Filter and records a lesson only if warranted. Skip for a clean first-pass PASS with no correction.
 
+## 🚦 Commit Governance (MANDATORY)
+
+Committing is **never autonomous** — the user MUST review and approve before any commit lands.
+
+1. When the chain reaches the commit stage, stage the changes (`git add`) and prepare a commit message, but do NOT commit unattended.
+2. Present the user with a review packet: the staged file list, a Korean Before vs. After summary, and the proposed commit message.
+3. Do NOT run `git commit` until the user has **explicitly approved** the review packet from step 2. Ask for confirmation and wait for an affirmative reply — never commit on assumed approval.
+4. If the user requests changes, revise the scope or message and re-present before attempting the commit again.
+
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
 Before issuing a delegation prompt, a final user-facing response, or accepting a chain result as complete, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
