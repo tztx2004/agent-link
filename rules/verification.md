@@ -46,7 +46,7 @@ Verify the result complies with every rule that governs this agent and this file
 - [ ] For each rule that touches the changed code, cite the specific clause and confirm the output complies.
 - [ ] For each mandatory skill listed in the agent's frontmatter, confirm it was invoked at the required step.
 - [ ] If a rule is ambiguous, document the interpretation chosen and why.
-- [ ] Check `feedback/INDEX.md` for any lesson whose `scope` matches this work. For each match, read the `feedback/lessons/*.md` body and confirm the output does not repeat that recorded mistake.
+- [ ] Load `feedback/INDEX.md` if not already loaded, then check it for any lesson whose `scope` matches this work. For each match, read the `feedback/lessons/*.md` body and confirm the output does not repeat that recorded mistake.
 
 **Fail condition:** a governing rule was not loaded, or a loaded rule is violated by the output.
 

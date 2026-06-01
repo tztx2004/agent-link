@@ -20,4 +20,4 @@ When passing tasks between agents, use the following format:
 3. **Reviewer** -> **QA-Engineer**: Verification & Testing.
 4. **QA-Engineer** -> **Orchestrator**: If FAIL, restart loop with failure report.
 5. **QA-Engineer** -> **User**: If PASS, close ticket.
-6. **QA-Engineer / User** -> **Retrospective**: On an explicit user correction or a repeated same-gate FAIL, the Orchestrator delegates to `retrospective`, which records a durable lesson in the feedback ledger (`feedback/`). One-off failures are not recorded.
+6. **Orchestrator** -> **Retrospective**: On an explicit user correction or a repeated same-gate FAIL (surfaced by the QA-Engineer or the user), the Orchestrator delegates to `retrospective`, which records a durable lesson in the feedback ledger (`feedback/`). One-off failures are not recorded.
