@@ -46,6 +46,7 @@ Verify the result complies with every rule that governs this agent and this file
 - [ ] For each rule that touches the changed code, cite the specific clause and confirm the output complies.
 - [ ] For each mandatory skill listed in the agent's frontmatter, confirm it was invoked at the required step.
 - [ ] If a rule is ambiguous, document the interpretation chosen and why.
+- [ ] Check `feedback/INDEX.md` for any lesson whose `scope` matches this work. For each match, read the `feedback/lessons/*.md` body and confirm the output does not repeat that recorded mistake.
 
 **Fail condition:** a governing rule was not loaded, or a loaded rule is violated by the output.
 
@@ -122,3 +123,14 @@ The agent must:
 3. Emit the audit block immediately before final output or handoff.
 
 A handoff to another agent is itself an output — the audit must run before it.
+
+---
+
+## 6. Feedback Capture (Recurrence Prevention)
+
+After the audit passes and a result is accepted, evaluate the capture trigger:
+
+- The user **explicitly corrected** the result, OR
+- The **same gate FAILed 2+ times** on this ticket (recurrence).
+
+If either holds, the Orchestrator hands off to the `retrospective` agent with: what happened, the relevant files, and the gate involved. The retrospective agent applies its own 3-Part Capture Filter and may decide not to record. One-off failures with neither condition are **not** recorded — silence is correct here, to keep the ledger high-signal.
