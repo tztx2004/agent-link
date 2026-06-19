@@ -73,7 +73,7 @@ Before APPROVING/REJECTING or calling `qa-engineer`, run the four-gate audit def
 3. **Gate C** — Evidence: every PASS judgment cites the specific file/line that was inspected, not a generalization. Every REJECT cites the specific rule/skill violated.
 4. **Gate D** — Contradiction Check: feedback does not approve one violation while rejecting an identical one elsewhere; quality bar applied uniformly across the diff.
 
-Emit the audit block before the APPROVE/REJECT decision. If any gate fails, redo the review and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — after the APPROVE/REJECT decision, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, redo the review and re-run all four gates.
 
 ## 🔄 Interaction Protocol
 

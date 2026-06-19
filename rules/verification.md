@@ -46,9 +46,9 @@ Verify the result complies with every rule that governs this agent and this file
 - [ ] For each rule that touches the changed code, cite the specific clause and confirm the output complies.
 - [ ] For each mandatory skill listed in the agent's frontmatter, confirm it was invoked at the required step.
 - [ ] If a rule is ambiguous, document the interpretation chosen and why.
-- [ ] Load `feedback/INDEX.md` if not already loaded, then check it for any lesson whose `scope` matches this work. For each match, read the `feedback/lessons/*.md` body and confirm the output does not repeat that recorded mistake.
+- [ ] Load `feedback/INDEX.md` if not already loaded. List EVERY lesson whose `scope` matches this work (include `universal` always). The INDEX one-liner is a lossy pointer, **not** a substitute for the lesson — for EACH match you MUST **open and read the full `feedback/lessons/<file>.md` body** and cite the body file path you opened in your audit. Confirm the output does not repeat the recorded mistake.
 
-**Fail condition:** a governing rule was not loaded, or a loaded rule is violated by the output.
+**Fail conditions:** a governing rule was not loaded; a loaded rule is violated by the output; **or** a scope-matching lesson was complied with / cited from the INDEX summary alone without its `lessons/<file>.md` body being opened and cited.
 
 ### Gate C — Evidence (결과 검증)
 
@@ -80,12 +80,14 @@ Verify the output is internally consistent and does not contradict the rules it 
 
 ## 3. Audit Output Format
 
-Before producing the final user-facing response or `<handoff>`, emit a short audit block. Keep it terse — one line per gate.
+Run the four gates **before finalizing** the output — problems must be found and fixed before anything is emitted. Verification always happens first; only the **printed block's position** changes.
+
+Place the `[Self-Audit]` block at the **very bottom of the output** — it is the LAST element the reader sees, printed _after_ the user-facing response (or after the `<handoff>` payload, PASS/FAIL, or APPROVE/REJECT decision). Keep it terse — one line per gate.
 
 ```
 [Self-Audit]
   A. Requirement alignment: ✓ (all 3 asks addressed: X, Y, Z)
-  B. Rule conformance:      ✓ (core_rules §2, react_patterns §0, §4)
+  B. Rule conformance:      ✓ (core_rules §2, react_patterns §0, §4; lessons read: lessons/2026-06-09-selective-code-splitting.md ✓ complied)
   C. Evidence:              ✓ (tsc --noEmit OK, eslint clean)
   D. Contradiction check:   ✓ (none)
 ```
@@ -119,8 +121,8 @@ Each agent file references this protocol in its workflow. The reference is manda
 The agent must:
 
 1. Load this file at session start (alongside other rules).
-2. Run the four gates after every result-producing step.
-3. Emit the audit block immediately before final output or handoff.
+2. Run the four gates after every result-producing step (before the output is finalized).
+3. Emit the audit block as the **final element** of the output — at the very bottom, after the user-facing content (or handoff payload / decision). The gates still RUN before the output is finalized; only the printed block sits last.
 
 A handoff to another agent is itself an output — the audit must run before it.
 

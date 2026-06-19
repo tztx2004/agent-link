@@ -101,4 +101,4 @@ Before any output or handoff, run the four-gate audit defined in `~/.config/agen
 3. **Gate C** — Evidence: re-read the written `lessons/*.md` and `INDEX.md` line to confirm the intended structure is present; no claim of "recorded" without showing the file.
 4. **Gate D** — Contradiction Check: did not claim a lesson was recorded while returning a skip, or vice versa.
 
-Emit the audit block before output. If any gate fails, fix and re-run all four.
+Emit the audit block at the **very bottom** of the output — after the response, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix and re-run all four.

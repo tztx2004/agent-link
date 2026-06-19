@@ -5,6 +5,10 @@ mcpServers:
   - context7
   - sequential-thinking
 skills:
+  - readability
+  - predictability
+  - cohesion
+  - coupling
   - vercel-react-best-practices
   - frontend-design
   - vercel-composition-patterns
@@ -295,6 +299,8 @@ function parseResponse(data: any): User {
 
 Invoke skills via the `Skill` tool at the appropriate stage. Follow the phase order below — do not skip skills for UI-related work.
 
+This applies to **review / audit requests too**, not only when you are writing code. When the task is to inspect or diagnose existing UI — e.g. "find what's lacking", "what's missing", "이 컴포넌트 점검해줘" — the seven skills in `react_patterns.md` §0 are your **review checklist**: run each one as an evaluation lens against the target files and report what it flags (skill, `file:line`, why, fix). A review that does not exercise those lenses fails Gate B. The phase table below additionally guides skill use when you are building.
+
 ### Skill Selection Guide
 
 | Phase              | Skill                         | When to invoke                                                                                                                                                                                               |
@@ -308,16 +314,29 @@ Invoke skills via the `Skill` tool at the appropriate stage. Follow the phase or
 | **Verification**   | `web-design-guidelines`       | After implementation — fetch latest guidelines and audit completed UI files for accessibility violations, missing ARIA attributes, or UX anti-patterns                                                       |
 | **Verification**   | `agent-browser`               | After implementation — launch a real browser to navigate, interact, screenshot, and validate the rendered app behaves as expected                                                                            |
 
+## ▶️ Behavioral Verification (MANDATORY before handoff)
+
+When you finish a feature or any functional change, confirm it actually **works** — type-checking and linting are not enough.
+
+1. **Run it**: via `Bash`, build or start the app (e.g. `npm run build`, or start/reuse the dev server) and confirm your change introduces no build or runtime errors.
+2. **Exercise the behavior — UI judgment**: when the change affects UI or any user-facing behavior (i.e. a visual/interaction judgment is involved), you MUST use the `agent-browser` skill to launch a real browser, navigate to the affected screen, perform the key interaction stated in the task (click, form input, navigation), capture a screenshot as evidence, and confirm no new browser console errors.
+3. **Exercise the behavior — pure non-UI logic**: drive it through the relevant entry point (unit test, script, or `Bash` invocation) so you have evidence it runs, not merely compiles.
+4. **If it genuinely cannot be run** in this environment, state the limitation explicitly in the audit — never claim it works without evidence.
+
+This evidence feeds Gate C below.
+
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
 Before producing any final response or calling `code-reviewer`, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
 1. **Gate A** — Requirement Alignment: every explicit ask addressed, no scope creep, no dropped scope.
-2. **Gate B** — Rule Conformance: `core_rules.md`, `style_guidelines.md`, `react_patterns.md` §0 (all seven mandatory skills invoked), and `tanstack_query.md` (if data-fetching code touched). File-naming convention: `.tsx` PascalCase, `.ts` camelCase.
-3. **Gate C** — Evidence: `npx tsc --noEmit` and `npx eslint <changed-files>` executed and clean. For UI changes, screenshot or `agent-browser` verification when feasible.
+2. **Gate B** — Rule Conformance: `core_rules.md`, `style_guidelines.md`, `react_patterns.md` §0 (all seven mandatory skills applied — fixed inline in build mode, reported as findings in review mode), and `tanstack_query.md` (if data-fetching code touched). File-naming convention: `.tsx` PascalCase, `.ts` camelCase.
+3. **Gate C** — Evidence:
+   - **Build mode (code was changed):** `npx tsc --noEmit` and `npx eslint <changed-files>` executed and clean, AND behavioral verification per § Behavioral Verification was performed (the feature actually runs; for UI/user-facing changes, `agent-browser` navigation + interaction + screenshot + console check). An unexplained skip of behavioral verification is a Gate C failure.
+   - **Review mode (no code changed):** evidence is the review itself — every finding must cite a concrete `file:line` you actually read, and each of the seven §0 lenses must be explicitly accounted for (flagged with findings, or stated clean). Do not run/build the app when you changed nothing; instead state that this was a review with no code changes. A finding without a `file:line` anchor is a Gate C failure.
 4. **Gate D** — Contradiction Check: output does not contradict cited rules or earlier assertions (e.g., did not return a raw setter after citing `react_patterns.md` §4).
 
-Emit the audit block before the handoff. If any gate fails, fix the output and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — after the handoff payload, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix the output and re-run all four gates.
 
 ## 🔄 Interaction
 

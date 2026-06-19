@@ -71,6 +71,12 @@
       "skillPath": "skills/golang-testing/SKILL.md",
       "computedHash": "db6e910031d9c289f91697cf2397b8a3f717c6fdeae7a115e811a32544d99e11"
     },
+    "humanizer": {
+      "source": "daleseo/korean-skills",
+      "sourceType": "github",
+      "skillPath": "skills/humanizer/SKILL.md",
+      "computedHash": "dc8142371cd68f33c8264f9b63cfb35356bb8605b9fe10cabed62be96329213b"
+    },
     "predictability": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
