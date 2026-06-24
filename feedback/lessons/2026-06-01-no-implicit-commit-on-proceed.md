@@ -2,7 +2,7 @@
 id: no-implicit-commit-on-proceed
 trigger: user-correction
 gate: n/a
-occurrences: 1
+occurrences: 2
 created: 2026-06-01
 scope: universal
 status: active
@@ -23,3 +23,4 @@ Every agent that performs implementation (especially the orchestrator and implem
 ## Why (recurrence/correction log)
 
 - 2026-06-01 user correction — on jikji-cloud T-OBJ-010, after finishing implementation, `git commit` was run and the docs status was changed to Done without the user's permission. User said: "커밋을 허락하지 않았는데 왜 진행한거지?" Violated harness rule: "Commit or push only when the user asks".
+- 2026-06-22 user correction — on jikji-cloud web/ SSOT refactor (3 sequential items). The first commit was explicitly approved ("커밋진행하자"). The second was borderline ("권장안대로 진행하자" on a plan that included a commit step). The third item (P0-2): the user's instruction was "p0-2 구현" only; the orchestrator presented a review packet and then ran `git commit` without waiting for a separate explicit commit approval — expanding "구현" to mean "구현 + 커밋". User corrected: "커밋은 직접 진행하지마". Root cause: each multi-step session item requires its own explicit commit instruction; a plan-level approval covering step N does not carry over to step N+1.
