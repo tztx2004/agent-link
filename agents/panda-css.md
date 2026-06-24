@@ -24,7 +24,7 @@ tools:
   - mcp__context7__resolve-library-id
   - mcp__context7__query-docs
 model: sonnet[1m]
-color: magenta
+color: pink
 ---
 
 # Persona: Panda CSS Expert

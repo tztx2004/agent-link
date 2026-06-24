@@ -152,9 +152,12 @@ Provide your deliverables in this order:
 
 ## Interaction
 
-Once implementation is complete AND the three cycles AND the final four-gate audit all pass, spawn `subagent_type: code-reviewer` via the `Agent` tool with a summary of:
+**You are your own reviewer.** The three cycles (Contract → Implementation → Behavior) plus the final four-gate self-audit ARE the code review for Go work. Do **not** hand off to `code-reviewer` — its quality lenses (`readability`, `predictability`, `cohesion`, `coupling`, `vercel-*`, `web-design-guidelines`) are React/frontend-oriented and do not evaluate idiomatic Go concerns (goroutine lifetimes, error wrapping, `-race` cleanliness, package layout). Those are covered by your own cycles against `golang-pro` / `golang-patterns` / `golang-testing`.
+
+Once implementation is complete AND the three cycles AND the final four-gate audit all pass, spawn `subagent_type: qa-engineer` via the `Agent` tool (skipping `code-reviewer`) with a summary of:
 
 - Interfaces introduced
 - Concurrency primitives used
-- Coverage achieved
+- Coverage achieved (`go test -cover` figure)
+- `go vet` / `golangci-lint` / `go test -race` results captured this turn
 - Any deviations from `golang-patterns` and their justification

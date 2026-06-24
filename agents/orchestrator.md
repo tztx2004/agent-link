@@ -84,9 +84,12 @@ Criteria: multi-file changes, new features, architectural decisions, changes spa
    - Backend tasks (Go project) → `subagent_type: golang-backend-developer`
    - Backend tasks (non-Go project) → `subagent_type: backend-developer`
    - Frontend + backend → spawn `frontend-developer` and the matching backend agent (`golang-backend-developer` or `backend-developer`) in parallel
+   - FSD architecture work (layer/slice placement, structure compliance review, feature scaffolding, cross-slice import enforcement) → `subagent_type: fsd-architect`
+   - Behavior-preserving restructuring (component decomposition, decoupling, declarative migration — no new behavior) → `subagent_type: refactor`
+   - Panda CSS–specific styling/token/recipe work — route here **only when the project actually uses Panda CSS**. Panda is NOT the default styling path; confirm Panda is in use (e.g. a `panda.config.ts` exists) before routing, otherwise keep styling inside `frontend-developer` → `subagent_type: panda-css`
    - Review-only tasks → `subagent_type: code-reviewer`
    - Recurrence capture (post-QA) → `subagent_type: retrospective`
-   - Each implementation agent will autonomously chain to `code-reviewer` → `qa-engineer`.
+   - Chain to QA: most implementation agents autonomously chain `code-reviewer` → `qa-engineer`. **Exception — `golang-backend-developer` is its own reviewer** (three-cycle + four-gate self-audit) and chains **directly to `qa-engineer`, skipping `code-reviewer`**, because the reviewer's quality lenses are React/frontend-oriented and do not apply to idiomatic Go.
 7. **Iterate**: If the chain returns a FAIL report, analyze it and re-delegate with a refined prompt.
 8. **Capture (recurrence prevention)**: After QA returns, if the user explicitly corrected the result OR the same gate FAILed 2+ times on this ticket, delegate to `subagent_type: retrospective` with the incident details (what happened, files, gate). The retrospective agent applies its 3-Part Capture Filter and records a lesson only if warranted. Skip for a clean first-pass PASS with no correction.
 
