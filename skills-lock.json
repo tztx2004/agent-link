@@ -38,6 +38,12 @@
       "skillPath": "frontend-fundamentals-plugin/skills/coupling/SKILL.md",
       "computedHash": "2de669a509671c65e0c674ff461dc307033cec457477b644e9c6516e40a86bdd"
     },
+    "docx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/docx/SKILL.md",
+      "computedHash": "6962db07127ee540a56e4677f65576d0727668a1d67f7da8bc978f10791c2bfe"
+    },
     "feature-sliced-design": {
       "source": "feature-sliced/skills",
       "sourceType": "github",
