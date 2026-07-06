@@ -6,6 +6,7 @@ mcpServers:
   - sequential-thinking
 skills:
   - agent-browser
+  - humanizer
 tools:
   - Bash
   - Read
@@ -55,6 +56,8 @@ When a task is complete, generate a **Final Summary Report** in **KOREAN** inclu
 2. **Comparison (Before vs. After)**: High-level changes in architecture or logic.
 3. **Metrics & Figures**: (Example: "Reduced complexity by 20%", "Added 5 test cases", "Removed 150 lines of dead code").
 4. **Verification Evidence**: Output of successful tests or builds.
+
+> **Korean prose polish**: Before emitting the final report, apply the `humanizer` skill to the report's Korean prose so it reads naturally (removes AI-typical patterns such as comma overuse, translationese, and structural monotony). Keep technical terms, metrics, file paths, and code identifiers untouched — polish the prose only, never the evidence.
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 

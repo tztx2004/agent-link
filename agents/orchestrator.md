@@ -4,6 +4,8 @@ description: Strategic leader and task distributor. Responsible for planning, de
 mcpServers:
   - context7
   - sequential-thinking
+skills:
+  - grilling
 tools:
   - Read
   - Glob
@@ -75,7 +77,7 @@ Steps:
 Criteria: multi-file changes, new features, architectural decisions, changes spanning frontend + backend.
 
 1. **Declare tier**: State the complexity tier per `thinking_model.md` §3 (typically HIGH for complex tasks; MEDIUM if scope is bounded to one domain).
-2. **Analyze (READ → REACT → ANALYZE)**: Read `.workflow/tickets/[TICKET-ID].md`. Apply the first three stages of `thinking_model.md`. Emit a one-line trace per stage.
+2. **Analyze (READ → REACT → ANALYZE)**: Read `.workflow/tickets/[TICKET-ID].md`. Apply the first three stages of `thinking_model.md`. Emit a one-line trace per stage. **Ambiguity check**: if READ → REACT leaves unresolved ambiguity in the ticket (unclear acceptance criteria, conflicting asks, multiple viable interpretations), invoke the `grilling` skill to interview the user — one question at a time, with a recommended answer per question — and resolve every open branch BEFORE composing any delegation prompt. Questions answerable from the codebase are answered by exploration, not asked.
 3. **Scan**: Research related files using `Read`, `Glob`, `Grep`. This deepens the READ/ANALYZE outputs from step 2.
 4. **Detect backend language**: Before routing any backend work, check the project for Go signals — presence of `go.mod` at the repo root, a `go.sum`, or `*.go` files inside the target paths. If any is found, treat backend as a **Go project**; otherwise treat it as a **non-Go project**.
 5. **Plan (RESTRUCTURE → STRUCTURE)**: Decide if duplication warrants structural change, then produce a numbered, bounded plan. For HIGH tier, delegate STRUCTURE to a Plan agent.

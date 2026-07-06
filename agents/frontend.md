@@ -17,6 +17,8 @@ skills:
   - agent-browser
   - web-design-guidelines
   - tanstack-table
+  - tanstack-query
+  - tanstack-query-best-practices
 tools:
   - Read
   - Write
@@ -323,16 +325,17 @@ This applies to **review / audit requests too**, not only when you are writing c
 
 ### Skill Selection Guide
 
-| Phase              | Skill                         | When to invoke                                                                                                                                                                                               |
-| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Design**         | `frontend-design`             | Before writing any markup — commit to a bold aesthetic direction (typography, color palette, layout) for new pages, landing pages, dashboards, or any component where visual quality is the primary concern  |
-| **Design**         | `ui-ux-pro-max`               | When making visual design decisions — color/typography/spacing systems, interaction patterns, accessibility standards, style selection (glassmorphism, bento grid, etc.), animation, or chart types          |
-| **Implementation** | `vercel-composition-patterns` | When designing component APIs or refactoring — avoid boolean prop proliferation (`isX`, `hasX`), use compound components with shared context, prefer `children` over render props, lift state into providers |
-| **Implementation** | `vercel-react-best-practices` | When writing any React/Next.js code — eliminate data-fetching waterfalls (`Promise.all`), avoid barrel imports, prevent unnecessary re-renders, use Server Components by default, defer non-critical work    |
-| **Implementation** | `typescript-advanced-types`   | When implementing complex type logic — generics, conditional types, mapped types, discriminated unions, or when `any` would be the easy path but `unknown` with a type guard is correct                      |
-| **Implementation** | `tanstack-table`              | When creating or modifying any table UI — data grids, sortable/filterable tables, paginated lists, or any component using `@tanstack/react-table`. Always invoke before writing table logic.                 |
-| **Verification**   | `web-design-guidelines`       | After implementation — fetch latest guidelines and audit completed UI files for accessibility violations, missing ARIA attributes, or UX anti-patterns                                                       |
-| **Verification**   | `agent-browser`               | After implementation — launch a real browser to navigate, interact, screenshot, and validate the rendered app behaves as expected                                                                            |
+| Phase              | Skill                                              | When to invoke                                                                                                                                                                                               |
+| ------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Design**         | `frontend-design`                                  | Before writing any markup — commit to a bold aesthetic direction (typography, color palette, layout) for new pages, landing pages, dashboards, or any component where visual quality is the primary concern  |
+| **Design**         | `ui-ux-pro-max`                                    | When making visual design decisions — color/typography/spacing systems, interaction patterns, accessibility standards, style selection (glassmorphism, bento grid, etc.), animation, or chart types          |
+| **Implementation** | `vercel-composition-patterns`                      | When designing component APIs or refactoring — avoid boolean prop proliferation (`isX`, `hasX`), use compound components with shared context, prefer `children` over render props, lift state into providers |
+| **Implementation** | `vercel-react-best-practices`                      | When writing any React/Next.js code — eliminate data-fetching waterfalls (`Promise.all`), avoid barrel imports, prevent unnecessary re-renders, use Server Components by default, defer non-critical work    |
+| **Implementation** | `typescript-advanced-types`                        | When implementing complex type logic — generics, conditional types, mapped types, discriminated unions, or when `any` would be the easy path but `unknown` with a type guard is correct                      |
+| **Implementation** | `tanstack-table`                                   | When creating or modifying any table UI — data grids, sortable/filterable tables, paginated lists, or any component using `@tanstack/react-table`. Always invoke before writing table logic.                 |
+| **Implementation** | `tanstack-query` + `tanstack-query-best-practices` | When writing or modifying any data-fetching code — query factories, `useSuspenseQuery` wiring, mutations, cache invalidation. Invoke both alongside the `tanstack_query.md` rules BEFORE writing the code.   |
+| **Verification**   | `web-design-guidelines`                            | After implementation — fetch latest guidelines and audit completed UI files for accessibility violations, missing ARIA attributes, or UX anti-patterns                                                       |
+| **Verification**   | `agent-browser`                                    | After implementation — launch a real browser to navigate, interact, screenshot, and validate the rendered app behaves as expected                                                                            |
 
 ## ▶️ Behavioral Verification (MANDATORY before handoff)
 

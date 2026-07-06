@@ -9,6 +9,10 @@ skills:
   - vercel-react-best-practices
   - typescript-advanced-types
   - ui-ux-pro-max
+  - readability
+  - predictability
+  - cohesion
+  - coupling
 tools:
   - Read
   - Glob
@@ -75,6 +79,15 @@ Skill: typescript-advanced-types
 Skill: ui-ux-pro-max
 ```
 
+**Load conditionally — per checklist dimension flagged in Step 1.** When Step 1 identifies issues in a Refactoring Checklist dimension, invoke the matching quality skill BEFORE refactoring those issues — it defines what counts as a violation and the correct fix:
+
+```
+Skill: readability      # nested ternaries, unnamed complex conditions, code requiring mental translation
+Skill: predictability   # hidden side effects in getX()/fetchX(), name-behavior mismatch, inconsistent return types
+Skill: cohesion         # one feature spread across directories, duplicated magic numbers, deep ../../.. import paths
+Skill: coupling         # props drilling 3+ layers, hooks returning 5+ values, unrelated modules breaking together
+```
+
 Do not proceed to Step 1 until all required skills have been invoked.
 
 > **Why**: Skills define the rule set used to evaluate code. Analyzing code without loading the rules first means the evaluation will miss violations that are only defined in those rules — even if the file is read correctly.
@@ -90,12 +103,13 @@ Do not proceed to Step 1 until all required skills have been invoked.
 
 Apply changes using the skills already loaded in Step 0. Reference the mapping below to confirm which loaded skill governs each category:
 
-| Issue detected                                                                                                                                                     | Governing skill                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| Boolean prop proliferation (`isX`, `hasX`), monolithic components, state not lifted to provider                                                                    | `vercel-composition-patterns`                                                             |
-| Data-fetching waterfall, unnecessary re-renders, `useEffect` for derived state, barrel imports, missing `Promise.all`, `useEffect` where an event handler suffices | `vercel-react-best-practices`                                                             |
-| `any` usage, unsafe `as` assertions, missing type guards, complex inline types that should be generics or utility types                                            | `typescript-advanced-types`                                                               |
-| className restructuring, visual hierarchy, spacing/layout improvements, UI pattern changes, design token usage, accessibility concerns                             | `ui-ux-pro-max` _(load conditionally in Step 0 only when style refactoring is requested)_ |
+| Issue detected                                                                                                                                                     | Governing skill                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Boolean prop proliferation (`isX`, `hasX`), monolithic components, state not lifted to provider                                                                    | `vercel-composition-patterns`                                                                                                                          |
+| Data-fetching waterfall, unnecessary re-renders, `useEffect` for derived state, barrel imports, missing `Promise.all`, `useEffect` where an event handler suffices | `vercel-react-best-practices`                                                                                                                          |
+| `any` usage, unsafe `as` assertions, missing type guards, complex inline types that should be generics or utility types                                            | `typescript-advanced-types`                                                                                                                            |
+| className restructuring, visual hierarchy, spacing/layout improvements, UI pattern changes, design token usage, accessibility concerns                             | `ui-ux-pro-max` _(load conditionally in Step 0 only when style refactoring is requested)_                                                              |
+| Violations flagged in a Refactoring Checklist dimension (readability / predictability / cohesion / coupling)                                                       | Matching quality skill — `readability`, `predictability`, `cohesion`, or `coupling` _(load conditionally per Step 0 when Step 1 flags that dimension)_ |
 
 > **MANDATORY**: Any change that touches type definitions, interfaces, generics, or type assertions — no matter how small — MUST be governed by `typescript-advanced-types` (already loaded in Step 0). Do not skip verification against this skill even for minor type fixes.
 

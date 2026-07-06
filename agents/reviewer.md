@@ -13,6 +13,7 @@ skills:
   - vercel-composition-patterns
   - vercel-react-best-practices
   - web-design-guidelines
+  - tanstack-query-best-practices
 tools:
   - Read
   - Glob
@@ -56,13 +57,14 @@ These four skills MUST be invoked sequentially for every code review request, wi
 
 ### Phase 2 — Conditional (invoke when the diff matches)
 
-| Skill                         | When to invoke                                                                                                                                                                |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `typescript-advanced-types`   | When you spot `any` usage, missing type guards, unsafe type assertions (`as`), or overly complex inline types that should be extracted into utility types or generics         |
-| `vercel-composition-patterns` | When a component has boolean prop proliferation (`isX`, `hasX`), uses render props instead of `children`, or mixes state management with UI rendering in violation of SRP     |
-| `vercel-react-best-practices` | When reviewing React/Next.js files — check for data-fetching waterfalls, missing `Promise.all`, barrel imports, unnecessary re-renders, or `useEffect` used for derived state |
-| `web-design-guidelines`       | When the diff touches UI component files — fetch latest guidelines and audit for accessibility violations, missing ARIA attributes, or UX anti-patterns                       |
-| TanStack Query rules          | When the diff contains API calls or data fetching logic — read `~/.config/agent-link/rules/tanstack_query.md` and verify compliance before approving                          |
+| Skill                           | When to invoke                                                                                                                                                                    |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `typescript-advanced-types`     | When you spot `any` usage, missing type guards, unsafe type assertions (`as`), or overly complex inline types that should be extracted into utility types or generics             |
+| `vercel-composition-patterns`   | When a component has boolean prop proliferation (`isX`, `hasX`), uses render props instead of `children`, or mixes state management with UI rendering in violation of SRP         |
+| `vercel-react-best-practices`   | When reviewing React/Next.js files — check for data-fetching waterfalls, missing `Promise.all`, barrel imports, unnecessary re-renders, or `useEffect` used for derived state     |
+| `web-design-guidelines`         | When the diff touches UI component files — fetch latest guidelines and audit for accessibility violations, missing ARIA attributes, or UX anti-patterns                           |
+| `tanstack-query-best-practices` | When the diff contains TanStack Query code — invoke to review with the same best-practice lens the implementation agents use (query factories, cache handling, mutation patterns) |
+| TanStack Query rules            | When the diff contains API calls or data fetching logic — read `~/.config/agent-link/rules/tanstack_query.md` and verify compliance before approving                              |
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
