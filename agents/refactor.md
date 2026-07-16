@@ -13,15 +13,9 @@ skills:
   - predictability
   - cohesion
   - coupling
+  - vitest
 tools:
-  - Read
-  - Glob
-  - Grep
-  - Write
-  - Edit
-  - Bash
-  - Agent
-  - Skill
+  - "*"
 model: opus[1m]
 color: yellow
 ---
@@ -47,6 +41,14 @@ Transform imperative, tightly-coupled, or monolithic code into declarative, comp
 > **Rules**: Follow `~/.config/agent-link/rules/react_patterns.md` for shared React patterns (declarative rendering, model/UI separation, hook design, useEffect constraints).
 > **API Rules**: When refactoring any API call or data fetching logic, follow `~/.config/agent-link/rules/tanstack_query.md`.
 > **Verification**: You MUST run the verification protocol in `~/.config/agent-link/rules/verification.md` after Step 3 and before Step 4 handoff.
+
+## ♻️ Reuse Before Creating
+
+When a refactor extracts logic into a new hook, component, util, or type, first check whether the project already has a shared one that fits. Decomposition should route toward existing shared primitives, not spawn new near-duplicates.
+
+- **Search first.** Use `Glob`/`Grep` to look for existing shared hooks, components, utils, types, and design tokens before introducing a new extracted unit.
+- **Reuse or extend, don't recreate.** If a suitable shared primitive exists, extract toward it (import/compose/extend). Creating a second near-identical copy contradicts the cohesion goal of the refactor itself and fails Gate B.
+- **Create only when nothing fits.** Introduce a new shared unit only when no existing one covers the need; note what you searched for and why nothing matched.
 
 ## 🔍 Refactoring Checklist
 
@@ -77,6 +79,12 @@ Skill: typescript-advanced-types
 
 ```
 Skill: ui-ux-pro-max
+```
+
+**Load conditionally — when a behavior-preservation safety net is needed** (the code being restructured has no test coverage for its observable behavior, or existing tests must be updated to survive the refactor). Write characterization tests BEFORE restructuring so Step 3 can prove behavior is unchanged:
+
+```
+Skill: vitest
 ```
 
 **Load conditionally — per checklist dimension flagged in Step 1.** When Step 1 identifies issues in a Refactoring Checklist dimension, invoke the matching quality skill BEFORE refactoring those issues — it defines what counts as a violation and the correct fix:
@@ -133,9 +141,12 @@ npx tsc --noEmit
 
 # Lint
 npx eslint <changed-files>
+
+# Tests — run when the project has a test suite or you added safety-net tests in Step 0
+npx vitest run <related-test-files>
 ```
 
-Fix any errors before proceeding.
+Fix any errors before proceeding. A green test run before AND after the refactor is the strongest evidence that behavior was preserved.
 
 ### Step 4 — Self-Audit (MANDATORY)
 

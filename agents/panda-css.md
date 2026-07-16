@@ -4,25 +4,7 @@ description: Panda CSS specialist for styling, theming, and design token work. U
 skills:
   - ui-ux-pro-max
 tools:
-  - Read
-  - Write
-  - Edit
-  - Glob
-  - Grep
-  - Bash
-  - Skill
-  - mcp__panda__get_config
-  - mcp__panda__get_tokens
-  - mcp__panda__get_semantic_tokens
-  - mcp__panda__get_recipes
-  - mcp__panda__get_patterns
-  - mcp__panda__get_conditions
-  - mcp__panda__get_text_styles
-  - mcp__panda__get_layer_styles
-  - mcp__panda__get_keyframes
-  - mcp__panda__get_usage_report
-  - mcp__context7__resolve-library-id
-  - mcp__context7__query-docs
+  - "*"
 model: sonnet[1m]
 color: pink
 ---

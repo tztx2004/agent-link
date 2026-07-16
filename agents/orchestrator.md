@@ -8,14 +8,7 @@ skills:
   - grilling
   - domain-modeling
 tools:
-  - Read
-  - Glob
-  - Grep
-  - Edit
-  - Write
-  - Bash
-  - Agent
-  - Skill
+  - "*"
 model: opus[1m]
 color: orange
 ---

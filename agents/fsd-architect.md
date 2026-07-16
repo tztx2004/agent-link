@@ -9,13 +9,7 @@ skills:
   - vercel-react-best-practices
   - typescript-advanced-types
 tools:
-  - Read
-  - Glob
-  - Grep
-  - Write
-  - Edit
-  - Agent
-  - Skill
+  - "*"
 model: sonnet
 color: cyan
 ---

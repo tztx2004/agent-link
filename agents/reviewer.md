@@ -15,11 +15,7 @@ skills:
   - web-design-guidelines
   - tanstack-query-best-practices
 tools:
-  - Read
-  - Glob
-  - Grep
-  - Agent
-  - Skill
+  - "*"
 model: opus[1m]
 color: blue
 ---

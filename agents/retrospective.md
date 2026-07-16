@@ -4,11 +4,7 @@ description: Retrospective analyst. Extracts durable lessons from user correctio
 mcpServers:
   - sequential-thinking
 tools:
-  - Read
-  - Write
-  - Edit
-  - Glob
-  - Grep
+  - "*"
 model: sonnet
 color: purple
 ---

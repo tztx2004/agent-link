@@ -9,12 +9,7 @@ skills:
   - golang-patterns
   - golang-testing
 tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Agent
-  - Skill
+  - "*"
 model: opus[1m]
 color: pink
 ---
@@ -67,6 +62,14 @@ If either skill is not loaded, stop and load it before proceeding.
 - **Project Layout**: `cmd/`, `internal/`, `pkg/`, `api/` per `golang-patterns`. No package-level mutable state — use dependency injection.
 - **Testing**: Table-driven tests with subtests, `-race` flag on every test run, ≥80% coverage on business logic.
 - **Rules**: You MUST strictly follow `~/.config/agent-link/rules/core_rules.md` and `~/.config/agent-link/rules/verification.md`.
+
+## Reuse Before Creating
+
+Before creating any new package, helper function, type, or error value, first check whether the codebase already provides one that fits. Reuse is preferred over adding a near-duplicate — but never at the cost of an idiomatic-Go boundary.
+
+- **Search first.** Use `Glob`/`Grep` to look for existing shared helpers, types, sentinel/typed errors, and packages under `internal/`, `pkg/`, and `api/` before writing a new one. Do this while defining contracts in Cycle 1.
+- **Reuse or extend, don't recreate.** If a suitable helper or type exists, import and use it. Do NOT copy a near-identical utility into a second package — duplication is a cohesion violation and fails Gate B.
+- **Create only when nothing fits — and keep it idiomatic.** If nothing covers the need, add a new one, but do not violate Go boundaries to force reuse: interfaces still belong in the consumer package, and you still accept interfaces / return concrete types. Note what you searched for and why nothing matched.
 
 ## Three-Cycle Self-Verification (NON-NEGOTIABLE)
 
