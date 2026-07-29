@@ -6,15 +6,18 @@
 - **Strict Typing**: Enable strict null checks and avoid non-null assertions (`!`).
 - **Interfaces vs. Types**: Use `interface` for public APIs and object structures. Use `type` for unions, intersections, and primitives.
 
-## 2. React & Next.js Best Practices
+## 2. React Best Practices
 
 - **Component Declaration**: Use functional components. Avoid `React.FC`; prefer explicit props destructuring with types.
 - **Naming Convention**: Components use `PascalCase`. Functions and variables use `camelCase`.
-- **Server Components**: Keep them thin. Move complex logic to dedicated utility functions or Server Actions.
-- **Client Components**: Use the `'use client'` directive sparingly at the leaf nodes of the component tree.
-- **Server Actions**: Group related actions in a `actions.ts` file or define them with clear async boundaries.
+- **Server-first frameworks (default — Next.js / RSC); skip entirely on client SPAs (Vite / CRA):**
+  - **Server Components**: keep them thin; move complex logic to utilities or Server Actions.
+  - **Client Components**: use `'use client'` sparingly, at leaf nodes.
+  - **Server Actions**: group related actions in an `actions.ts` file with clear async boundaries.
 
-## 3. Styling (Tailwind CSS)
+## 3. Styling (default: Tailwind CSS)
+
+> Applies when the project uses Tailwind (the default). Projects on another styling system (e.g. Panda CSS) follow their own token SSOT and rules — see the project's `web/` styling rules — and this entire section does not apply.
 
 Currently **Tailwind v3**, with a **v4 migration planned** — avoid v3-only escape hatches that would block the move.
 
@@ -30,4 +33,4 @@ Currently **Tailwind v3**, with a **v4 migration planned** — avoid v3-only esc
 
 - **Self-Documenting Code**: Write code that explains "what" it does. Use comments to explain "why" it does it.
 - **Small Functions**: Keep functions focused on a single task (SRP).
-- **Error Handling**: Implement proper `Error Boundaries` and `loading.tsx` states in Next.js.
+- **Error Handling**: Implement proper error boundaries and loading states using the project's framework conventions — `loading.tsx` in the Next.js App Router (default); per-section `Suspense` + `ErrorBoundary` in client SPAs.

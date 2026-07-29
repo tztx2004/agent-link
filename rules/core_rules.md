@@ -2,7 +2,7 @@
 
 ## 1. Precedence & Overrides
 
-- **Local Rules First**: If `AGENT.md` exists in the current project root, its instructions OVERRIDE these global rules.
+- **Local Rules First**: If project-root agent instructions (`AGENTS.md` / `CLAUDE.md`) exist, they OVERRIDE these global rules — including the stack-specific standards in §4 and everything in `style_guidelines.md`. When the project names a framework, styling system, or file convention, follow the project over any default stated here.
 - **MCP Priority**: If `context7` or `sequential-thinking` MCPs are available, use them as the primary tools for research and reasoning.
 
 ## 2. Operational Mandates (Role & Workflow)
@@ -19,9 +19,12 @@
 - **Four Gates**: (A) Requirement Alignment, (B) Rule Conformance, (C) Evidence, (D) Contradiction Check. All four must pass and be reported in the audit block.
 - **No bypass**: If a gate fails, fix the output and re-run all four gates. Do not weaken or skip the protocol.
 
-## 4. Technical Standards (Next.js)
+## 4. Technical Standards (default: Next.js / RSC)
 
-- **Component Hierarchy**: Prioritize: 1. Server Components -> 2. Client Components.
+> **Stack detection first**: check the project's `package.json`. If `next` is a dependency, apply the Next.js default below. If it uses `vite` (or CRA) with no `next`, apply the **SPA exception** instead. When unsure, defer to the project's own agent instructions and `web/` rules.
+
+- **Rendering model (default — Next.js / RSC)**: prefer Server Components; drop to Client Components (`'use client'`) only at the leaves.
+  - **SPA exception (Vite / CRA)**: every component is a client component. Server Components, Server Actions, and `loading.tsx` do not exist — use the project's data-fetching + `Suspense`/`ErrorBoundary` conventions instead.
 - **Linting & Formatting**: Follow local configurations strictly.
 
 ## 5. Final Reporting (Human-Facing)
