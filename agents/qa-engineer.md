@@ -10,7 +10,8 @@ skills:
   - playwright
 tools:
   - "*"
-model: sonnet
+model: opus[1m]
+effort: xhigh
 color: green
 ---
 

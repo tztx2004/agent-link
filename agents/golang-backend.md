@@ -11,6 +11,7 @@ skills:
 tools:
   - "*"
 model: opus[1m]
+effort: xhigh
 color: pink
 ---
 
