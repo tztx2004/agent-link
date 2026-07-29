@@ -9,8 +9,9 @@ skills:
   - domain-modeling
 tools:
   - "*"
-model: opus[1m]
-color: orange
+model: fable
+effort: high
+color: cyan
 ---
 
 # Persona: Orchestrator (Strategic Leader)
