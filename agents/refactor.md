@@ -42,6 +42,7 @@ Transform imperative, tightly-coupled, or monolithic code into declarative, comp
 > **Rules**: Follow `~/.config/agent-link/rules/react_patterns.md` for shared React patterns (declarative rendering, model/UI separation, hook design, useEffect constraints).
 > **API Rules**: When refactoring any API call or data fetching logic, follow `~/.config/agent-link/rules/tanstack_query.md`.
 > **Verification**: You MUST run the verification protocol in `~/.config/agent-link/rules/verification.md` after Step 3 and before Step 4 handoff.
+> **Thinking Model**: You MUST apply the pre-implementation cognition protocol in `~/.config/agent-link/rules/thinking_model.md` — declare the complexity tier and run the stages that tier requires.
 
 ## ♻️ Reuse Before Creating
 
@@ -151,18 +152,16 @@ Fix any errors before proceeding. A green test run before AND after the refactor
 
 ### Step 4 — Self-Audit (MANDATORY)
 
-Run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+Run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: refactor scope matches the original request, no behavior changes introduced, no scope creep into new features.
-2. **Gate B** — Rule Conformance: `react_patterns.md` §0 (all seven mandatory skills invoked), §1–§5 patterns honored, `tanstack_query.md` complied with (if API/data-fetching touched), `typescript-advanced-types` skill invoked for every type-related change.
-3. **Gate C** — Evidence: `npx tsc --noEmit` and `npx eslint <changed-files>` from Step 3 clean. Re-state the captured output.
-4. **Gate D** — Contradiction Check: refactor does not reintroduce patterns it claims to remove (e.g., did not extract logic into a model file but then re-import setter into UI).
+1. **Gate B** — Rule Conformance: `react_patterns.md` §0 (all seven mandatory skills invoked), §1–§5 patterns honored, `tanstack_query.md` complied with (if API/data-fetching touched), `typescript-advanced-types` skill invoked for every type-related change.
+2. **Gate C** — Evidence: `npx tsc --noEmit` and `npx eslint <changed-files>` from Step 3 clean. Re-state the captured output. For every pattern this refactor claims to remove, grep the changed files for it and show the empty result — e.g. after extracting logic into a model file, no UI file re-imports the setter.
 
-Emit the audit block at the **very bottom** of the output — as the last thing before handing to Step 5, after the rest of the response. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — as the last thing before handing to Step 5, after the rest of the response. If any gate fails, fix and re-run both gates.
 
 ### Step 5 — Handoff
 
-Once all four audit gates report ✓, spawn `subagent_type: code-reviewer` using the `Agent` tool with:
+Once both audit gates report ✓, spawn `subagent_type: code-reviewer` using the `Agent` tool with:
 
 - A summary of what was changed and why
 - The list of files modified
@@ -243,4 +242,4 @@ const [user, orders] = await Promise.all([fetchUser(id), fetchOrders(id)]);
 
 - **Do not change behavior.** Refactoring is structural only — no new features, no removed functionality.
 - **One concern per commit.** Do not mix type fixes, component decomposition, and async optimizations in a single undifferentiated change.
-- **Verify before handoff.** Never spawn `code-reviewer` before `tsc --noEmit` passes AND the four-gate self-audit reports all ✓.
+- **Verify before handoff.** Never spawn `code-reviewer` before `tsc --noEmit` passes AND the two-gate self-audit reports all ✓.

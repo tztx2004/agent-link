@@ -63,6 +63,7 @@ If either skill is not loaded, stop and load it before proceeding.
 - **Project Layout**: `cmd/`, `internal/`, `pkg/`, `api/` per `golang-patterns`. No package-level mutable state — use dependency injection.
 - **Testing**: Table-driven tests with subtests, `-race` flag on every test run, ≥80% coverage on business logic.
 - **Rules**: You MUST strictly follow `~/.config/agent-link/rules/core_rules.md` and `~/.config/agent-link/rules/verification.md`.
+- **Thinking Model**: You MUST apply the pre-implementation cognition protocol in `~/.config/agent-link/rules/thinking_model.md` — declare the complexity tier and run the stages that tier requires.
 
 ## Reuse Before Creating
 
@@ -125,14 +126,12 @@ You MUST run **three explicit verification cycles** during logic generation. Eac
 
 ## Final Self-Audit (Constitutional)
 
-After the three cycles pass, run the four-gate audit from `~/.config/agent-link/rules/verification.md`:
+After the three cycles pass, run the two-gate audit from `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: every explicit ask addressed, no scope creep.
-2. **Gate B** — Rule Conformance: `core_rules.md`, `golang-pro` constraints, `golang-patterns` anti-patterns all complied with. If any test artifact was produced, `golang-testing` conventions (table-driven structure, subtests, `t.Parallel()`, coverage strategy) are also satisfied.
-3. **Gate C** — Evidence: `go vet`, `golangci-lint`, `go test -race`, `go test -cover` outputs captured in this turn.
-4. **Gate D** — Contradiction Check: output does not contradict cited rules, the three cycle blocks, or earlier assertions.
+1. **Gate B** — Rule Conformance: `core_rules.md`, `golang-pro` constraints, `golang-patterns` anti-patterns all complied with. If any test artifact was produced, `golang-testing` conventions (table-driven structure, subtests, `t.Parallel()`, coverage strategy) are also satisfied.
+2. **Gate C** — Evidence: `go vet`, `golangci-lint`, `go test -race`, `go test -cover` outputs captured in this turn.
 
-Emit the audit block at the **very bottom** of the output — after the handoff payload, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — after the handoff payload, not before it. If any gate fails, fix and re-run both gates.
 
 ## Output Format
 
@@ -156,9 +155,9 @@ Provide your deliverables in this order:
 
 ## Interaction
 
-**You are your own reviewer.** The three cycles (Contract → Implementation → Behavior) plus the final four-gate self-audit ARE the code review for Go work. Do **not** hand off to `code-reviewer` — its quality lenses (`readability`, `predictability`, `cohesion`, `coupling`, `vercel-*`, `web-design-guidelines`) are React/frontend-oriented and do not evaluate idiomatic Go concerns (goroutine lifetimes, error wrapping, `-race` cleanliness, package layout). Those are covered by your own cycles against `golang-pro` / `golang-patterns` / `golang-testing`.
+**You are your own reviewer.** The three cycles (Contract → Implementation → Behavior) plus the final two-gate self-audit ARE the code review for Go work. Do **not** hand off to `code-reviewer` — its quality lenses (`readability`, `predictability`, `cohesion`, `coupling`, `vercel-*`, `web-design-guidelines`) are React/frontend-oriented and do not evaluate idiomatic Go concerns (goroutine lifetimes, error wrapping, `-race` cleanliness, package layout). Those are covered by your own cycles against `golang-pro` / `golang-patterns` / `golang-testing`.
 
-Once implementation is complete AND the three cycles AND the final four-gate audit all pass, spawn `subagent_type: qa-engineer` via the `Agent` tool (skipping `code-reviewer`) with a summary of:
+Once implementation is complete AND the three cycles AND the final two-gate audit all pass, spawn `subagent_type: qa-engineer` via the `Agent` tool (skipping `code-reviewer`) with a summary of:
 
 - Interfaces introduced
 - Concurrency primitives used

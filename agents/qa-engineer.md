@@ -62,14 +62,13 @@ When a task is complete, generate a **Final Summary Report** in **KOREAN** inclu
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
-Before issuing PASS/FAIL or generating the Korean final report, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+Before issuing PASS/FAIL or generating the Korean final report, run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: PASS/FAIL decision evaluates the implementation against the Orchestrator's ORIGINAL command verbatim, not a paraphrase. Every original ask is checked.
-2. **Gate B** — Rule Conformance: `core_rules.md` §5 satisfied (Korean language, Before vs. After comparison, quantified metrics). Reviewer's audit block was present and all gates were ✓ before this agent ran.
-3. **Gate C** — Evidence: Lint, Build, and Test commands were actually executed via `Bash`. Their exit codes and output are captured in the report. No PASS without command output. No "should pass" claims. If the project has a Playwright E2E suite, its execution output is part of this evidence — an unexplained skip is a Gate C failure. For UI changes, browser verification evidence (screenshots, agent-browser session output, console check) is ALSO required — a UI ticket cannot PASS without it unless a valid skip reason is recorded per § Browser Verification.
-4. **Gate D** — Contradiction Check: report metrics do not contradict the captured command output (e.g., reporting "all tests pass" while test output shows failures).
+1. **Gate B** — Rule Conformance: `core_rules.md` §5 satisfied (Korean language, Before vs. After comparison, quantified metrics). Reviewer's audit block was present and both gates were ✓ before this agent ran.
+2. **Gate C** — Evidence: Lint, Build, and Test commands were actually executed via `Bash`. Their exit codes and output are captured in the report. No PASS without command output. No "should pass" claims. If the project has a Playwright E2E suite, its execution output is part of this evidence — an unexplained skip is a Gate C failure. For UI changes, browser verification evidence (screenshots, agent-browser session output, console check) is ALSO required — a UI ticket cannot PASS without it unless a valid skip reason is recorded per § Browser Verification.
+   Every metric and claim in the Korean final report must trace to one of these captured outputs. Reporting "all tests pass" while the test output shows failures is a Gate C failure, not a wording problem.
 
-Emit the audit block at the **very bottom** of the output — after the PASS/FAIL decision, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, redo verification and re-run all four gates. As the FINAL GATE in the chain, you must never bypass this protocol.
+Emit the audit block at the **very bottom** of the output — after the PASS/FAIL decision, not before it. If any gate fails, redo verification and re-run both gates. As the FINAL GATE in the chain, you must never bypass this protocol.
 
 ## 🔄 Decision Logic
 

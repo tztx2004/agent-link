@@ -5,7 +5,7 @@
 A six-stage cognitive workflow that every agent MUST apply **before and during implementation**. This file is the companion of `verification.md`:
 
 - **`thinking_model.md`** (this file): _pre_-implementation cognition — how to read context, form hypotheses, analyze impact, and plan changes.
-- **`verification.md`**: _post_-implementation audit — four-gate checks on the produced result.
+- **`verification.md`**: _post_-implementation audit — two-gate checks on the produced result.
 
 The output of the final stage (REFLECT) becomes the input of Gate C in `verification.md`. The two protocols are sequential, not redundant.
 
@@ -43,12 +43,12 @@ Do not run stages the task does not require. Over-engineering simple work wastes
 The protocols chain like this:
 
 ```
-READ → REACT → ANALYZE → RESTRUCTURE → STRUCTURE → (Implement) → REFLECT → [4-Gate Audit] → Output
+READ → REACT → ANALYZE → RESTRUCTURE → STRUCTURE → (Implement) → REFLECT → [2-Gate Audit] → Output
 ```
 
-- **ANALYZE → Gate A & B**: the impact list and rule citations gathered here become the input for Requirement Alignment (A) and Rule Conformance (B).
+- **ANALYZE → Gate B**: the rule citations gathered here become the input for Rule Conformance (B).
 - **REFLECT → Gate C**: captured command outputs are the evidence Gate C demands.
-- **Gate failure routing**: a failed audit gate routes back to STRUCTURE for replan, not to READ. Re-reading is only required when ANALYZE was wrong (a Gate A failure).
+- **Gate failure routing**: a failed audit gate routes back to STRUCTURE for replan, not to READ. Re-reading is only required when ANALYZE turned out to be wrong about the impact scope.
 
 ## 6. Per-Agent Application
 
@@ -57,6 +57,6 @@ Each agent that performs implementation or planning MUST:
 1. Load this file at session start alongside `core_rules.md` and `verification.md`.
 2. Declare the assigned complexity tier (LOW/MEDIUM/HIGH) at the start of the task.
 3. Run the stages required by that tier, emitting a short trace line per stage.
-4. Hand REFLECT outputs to the four-gate audit.
+4. Hand REFLECT outputs to the two-gate audit.
 
 Agents whose role is _post-hoc review only_ (e.g., `code-reviewer`, `qa-engineer`) MAY skip stages 1–5 and operate directly on the artifacts produced by an implementation agent, but MUST still verify that the implementation agent ran the protocol.

@@ -18,7 +18,7 @@ Whenever a governing document (architecture rules, code conventions, policy docs
 
 1. After writing the rule, enumerate every file in scope (router config, component index, etc.) and verify each against the new rule.
 2. For each violation found, either fix it in the same task OR create an explicit follow-up task and leave a `# TODO(rule-sweep):` comment in the governing doc until it is resolved.
-3. Gate C evidence must be "zero violations found in sweep" (cite the files checked), not "formatter passed." Gate D must confirm no new rule contradicts the current state of the codebase.
+3. Gate C evidence must be "zero violations found in sweep" (cite the files checked), not "formatter passed." The sweep is what proves the new rule does not contradict the current state of the codebase — without it there is no evidence either way.
 
 Classifying a governing-rule addition as a Simple-Task Exception is only valid when the rule changes nothing about existing code (e.g., pure documentation of an already-enforced invariant). When in doubt, delegate to an implementation agent and require a sweep report.
 

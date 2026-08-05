@@ -54,14 +54,13 @@ For API syntax questions (e.g. how to use `cva()`, `sva()` options), use context
 - `~/.config/agent-link/rules/style_guidelines.md` section 3 (Styling) — project-level styling conventions
 - `~/.config/agent-link/rules/react_patterns.md` — React component/hook patterns to follow when writing styled components
 - `~/.config/agent-link/rules/verification.md` — MANDATORY pre-output self-audit protocol
+- `~/.config/agent-link/rules/thinking_model.md` — MANDATORY pre-implementation cognition protocol; declare the complexity tier and run the stages that tier requires
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
-Before producing any final response or styled output, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+Before producing any final response or styled output, run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: every styling ask addressed (variants, tokens, recipes), no extra components/tokens added beyond scope.
-2. **Gate B** — Rule Conformance: `style_guidelines.md` §3, Panda CSS property order (Layout → Box Model → Typography → Visuals → Transitions), no inline styles, no Tailwind, all values reference design tokens (never raw values).
-3. **Gate C** — Evidence: queried the project's actual Panda config via `mcp__panda__get_config` and relevant `mcp__panda__get_*` tools to confirm tokens/recipes exist. For new tokens, re-fetch and confirm.
-4. **Gate D** — Contradiction Check: did not bypass the token system by using raw values, did not write custom `css()` where a built-in Panda pattern would suffice, did not duplicate a recipe that already exists.
+1. **Gate B** — Rule Conformance: `style_guidelines.md` §3, Panda CSS property order (Layout → Box Model → Typography → Visuals → Transitions), no inline styles, no Tailwind, all values reference design tokens (never raw values).
+2. **Gate C** — Evidence: queried the project's actual Panda config via `mcp__panda__get_config` and relevant `mcp__panda__get_*` tools to confirm tokens/recipes exist. For new tokens, re-fetch and confirm. Before adding a recipe, the same query must show no existing recipe already covers it.
 
-Emit the audit block at the **very bottom** of the output — after the final response, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix the output and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — after the final response, not before it. If any gate fails, fix the output and re-run both gates.

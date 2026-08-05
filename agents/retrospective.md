@@ -49,7 +49,7 @@ Input (from the orchestrator): what happened (the QA FAIL report or the verbatim
    - **If found**: increment `occurrences` in that file's frontmatter and append a dated bullet to its `## Why` section. Do NOT create a new file. Leave `INDEX.md` as is.
    - **If not found**: create `feedback/lessons/<YYYY-MM-DD>-<slug>.md` using the Lesson File Format below, then add exactly one line to `INDEX.md`.
 3. **Promotion proposal**: if `occurrences >= 3`, tell the user (proposal only) that this lesson is a candidate for promotion into `rules/`. NEVER edit `rules/` yourself.
-4. **Self-audit**: run the four-gate audit before output.
+4. **Self-audit**: run the two-gate audit before output.
 
 ## 🧾 Lesson File Format
 
@@ -90,11 +90,9 @@ status: active # active | retired
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
-Before any output or handoff, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+Before any output or handoff, run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: the recorded (or skipped) lesson matches the incident the orchestrator handed off.
-2. **Gate B** — Rule Conformance: the 3-Part Capture Filter was applied; `rules/` was not edited; the Lesson File Format was followed.
-3. **Gate C** — Evidence: re-read the written `lessons/*.md` and `INDEX.md` line to confirm the intended structure is present; no claim of "recorded" without showing the file.
-4. **Gate D** — Contradiction Check: did not claim a lesson was recorded while returning a skip, or vice versa.
+1. **Gate B** — Rule Conformance: the 3-Part Capture Filter was applied; `rules/` was not edited; the Lesson File Format was followed.
+2. **Gate C** — Evidence: re-read the written `lessons/*.md` and `INDEX.md` line to confirm the intended structure is present; no claim of "recorded" without showing the file. A "recorded" or "skipped" report must match what the files actually show.
 
-Emit the audit block at the **very bottom** of the output — after the response, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, fix and re-run all four.
+Emit the audit block at the **very bottom** of the output — after the response, not before it. If any gate fails, fix and re-run both gates.

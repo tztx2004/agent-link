@@ -6,7 +6,7 @@ Every agent MUST run this protocol **after producing an internal result and befo
 Think → Implement/Result → VERIFY (this protocol) → Output
 ```
 
-This is non-negotiable. If any audit gate fails, **fix the output first, then re-run the audit** — do not bypass it, do not weaken the rule.
+This is non-negotiable. If an audit gate fails, **fix the output first, then re-run the audit** — do not bypass it, do not weaken the rule.
 
 ---
 
@@ -23,20 +23,11 @@ It does NOT apply to internal exploratory reads or planning steps that do not pr
 
 ---
 
-## 2. The Four Audit Gates
+## 2. The Two Audit Gates
 
-Run each gate in order. Each gate must produce an explicit ✓ or ✗ in your reasoning trace. Do not collapse multiple gates into a single judgment.
+Run each gate in order. Each gate must produce an explicit ✓ or ✗ in your reasoning trace. Do not collapse the two gates into a single judgment.
 
-### Gate A — Requirement Alignment (사고 검증)
-
-Verify the plan and result match what the user actually asked for.
-
-- [ ] Restate the user's original request in one sentence.
-- [ ] List every explicit ask (verbs, deliverables, constraints) → mark each ✓ addressed / ✗ missed.
-- [ ] Did I add scope the user did not request? If yes, remove it before output.
-- [ ] Did I drop scope the user did request? If yes, complete it before output.
-
-**Fail condition:** any explicit ask is ✗ or unverified.
+Both surviving gates are **externally grounded**: each one is discharged by opening a file, citing a clause, or running a command — never by re-reading your own output and judging it. That is the whole design. Anything you can satisfy by thinking harder about what you already wrote does not belong here.
 
 ### Gate B — Rule Conformance (규칙 검증)
 
@@ -61,70 +52,54 @@ Verify the result actually works. No success claim without artifacts.
   - Build: project build command (when changes plausibly affect build)
 - [ ] For UI changes: produce a screenshot or browser-driven verification when feasible.
 - [ ] For configuration / rules / agent files: re-read the final file and confirm intended structure is present.
+- [ ] **Audit every progress or completion claim against a tool result from this session.** Report only work you can point to evidence for; where something is not yet verified, say so explicitly rather than implying it passed.
+- [ ] When a governing rule was added or strengthened, the evidence is a **sweep of the code under that rule's scope** — "zero violations across the files checked", citing them — not a formatter or linter pass.
 - [ ] If verification is not possible in this environment, state the limitation explicitly — do NOT claim success.
 
 **Fail condition:** any "it works" / "tests pass" / "build succeeds" claim is made without showing the command and its output.
 
-### Gate D — Contradiction Check (자기모순 검열)
+---
 
-Verify the output is internally consistent and does not contradict the rules it claims to follow.
+## 3. Retired gates (A and D)
 
-- [ ] Re-read the final output as if seeing it for the first time.
-- [ ] Compare each non-trivial decision against the rules cited in Gate B. Any contradiction?
-- [ ] Compare against the agent's own prior statements this turn. Did I assert X early then do ¬X?
-- [ ] If a contradiction exists, **fix the output, not the rule.** Rules are immutable for this turn.
+This protocol previously ran four gates. **Gate A (Requirement Alignment) and Gate D (Contradiction Check) were retired** — both asked the model to re-read its own output and judge it, with no external artifact involved.
 
-**Fail condition:** the output contradicts a cited rule, an earlier assertion, or itself.
+Anthropic's Claude Opus 5 guidance is explicit that this scaffolding is now counterproductive: the model verifies its own work unprompted, and instructions telling it to verify cause over-verification, so _"removing them reduces over-verification with no capability regression — this is a delete, not a rewrite,"_ and _"the same applies to harness-level scaffolding."_ Independent research agrees that self-correction without an external signal yields limited and inconsistent gains.
+
+Letters **B and C were deliberately not renumbered** so existing references stay valid. Lessons in `feedback/lessons/` carrying `gate: A` or `gate: D` in their frontmatter are accurate historical records of when the failure occurred; read them normally — their substance now lands under Gate B or Gate C.
 
 ---
 
-## 3. Audit Output Format
+## 4. Audit Output Format
 
-Run the four gates **before finalizing** the output — problems must be found and fixed before anything is emitted. Verification always happens first; only the **printed block's position** changes.
+Run both gates **before finalizing** the output — problems must be found and fixed before anything is emitted. Verification always happens first; only the **printed block's position** changes.
 
 Place the `[Self-Audit]` block at the **very bottom of the output** — it is the LAST element the reader sees, printed _after_ the user-facing response (or after the `<handoff>` payload, PASS/FAIL, or APPROVE/REJECT decision). Keep it terse — one line per gate.
 
 ```
 [Self-Audit]
-  A. Requirement alignment: ✓ (all 3 asks addressed: X, Y, Z)
-  B. Rule conformance:      ✓ (core_rules §2, react_patterns §0, §4; lessons read: lessons/2026-06-09-selective-code-splitting.md ✓ complied)
-  C. Evidence:              ✓ (tsc --noEmit OK, eslint clean)
-  D. Contradiction check:   ✓ (none)
+  B. Rule conformance: ✓ (core_rules §2, react_patterns §0, §4; lessons read: lessons/2026-06-09-selective-code-splitting.md ✓ complied)
+  C. Evidence:         ✓ (tsc --noEmit OK, eslint clean)
 ```
 
-If any gate fails, the block becomes a remediation log:
+If a gate fails, the block becomes a remediation log:
 
 ```
 [Self-Audit]
-  A. ✓
   B. ✗ — react_patterns §4 violated: hook returns raw setter. Fixing.
   → Re-running audit after fix.
 ```
 
-After remediation, re-run **every** gate from A — not just the failed one. Fixes can introduce new violations elsewhere.
+After remediation, re-run **both** gates — not just the failed one. Fixes can introduce new violations elsewhere.
 
 ---
 
-## 4. Hard Prohibitions
+## 5. Hard Prohibitions
 
 - **No silent skipping.** If an environment limitation prevents a gate (e.g., no test runner available), state it explicitly in the audit block.
 - **No rule rewriting to pass the audit.** Rules in `rules/` and skill files are immutable during a task. If a rule seems wrong, finish the task as-is and flag the rule in the final report.
 - **No partial completion claims.** "Mostly works" / "should work" / "looks correct" are forbidden. Either evidence shows it works, or you state it does not.
-- **No collapsing the audit.** All four gates must appear in the trace, even if all pass trivially.
-
----
-
-## 5. Per-Agent Application
-
-Each agent file references this protocol in its workflow. The reference is mandatory and must appear as the **last step before any output or handoff** in the agent's defined workflow.
-
-The agent must:
-
-1. Load this file at session start (alongside other rules).
-2. Run the four gates after every result-producing step (before the output is finalized).
-3. Emit the audit block as the **final element** of the output — at the very bottom, after the user-facing content (or handoff payload / decision). The gates still RUN before the output is finalized; only the printed block sits last.
-
-A handoff to another agent is itself an output — the audit must run before it.
+- **No collapsing the audit.** Both gates must appear in the trace, even if both pass trivially.
 
 ---
 

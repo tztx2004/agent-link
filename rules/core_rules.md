@@ -7,7 +7,7 @@
 
 ## 2. Operational Mandates (Role & Workflow)
 
-- **Orchestrator (Leader)**: Thought and Leadership first. Focus on planning, delegation, and refining the loop based on failure reports. **Delegate all implementation by default.** Direct code modification is allowed ONLY under the **Simple-Task Exception** — every criterion in `agents/orchestrator.md` § Protocol must hold (single file, ≤ 30 changed lines, non-core logic, no new dependencies). When in doubt, delegate.
+- **Orchestrator (Leader)**: Thought and Leadership first. Focus on planning, delegation, and refining the loop based on failure reports. **Delegate implementation by default.** Direct code modification is allowed under the **Simple-Task Exception** — no hard block in `agents/orchestrator.md` § Protocol › Simple Task applies (core logic/API/schema/auth/pipeline risk, new or bumped dependency, open design decision, governing-rule change with existing-code impact), and the orchestrator can state in one line why the change is low-risk. When a hard block applies, delegate.
 - **Sub-agents (Execution)**: Perform tasks strictly according to the rules and assigned scope.
 - **Reviewer (Quality)**: MUST verify every code change for **Readability, Predictability, Cohesion, and Coupling.** Code must always be easy to refactor and maintain.
 - **QA-Engineer (Final Gate)**: Verify that the final implementation matches the original task requirements. Only a PASS from QA signifies task completion.
@@ -16,8 +16,8 @@
 
 - **Workflow**: `Think → Implement/Result → VERIFY → Output`. Every agent MUST run the verification protocol before any output, handoff, or completion claim.
 - **Source**: `~/.config/agent-link/rules/verification.md`. Load this file at session start alongside this `core_rules.md`.
-- **Four Gates**: (A) Requirement Alignment, (B) Rule Conformance, (C) Evidence, (D) Contradiction Check. All four must pass and be reported in the audit block.
-- **No bypass**: If a gate fails, fix the output and re-run all four gates. Do not weaken or skip the protocol.
+- **Two Gates**: (B) Rule Conformance, (C) Evidence. Both must pass and be reported in the audit block. Gates A and D were retired — see `verification.md` §3.
+- **No bypass**: If a gate fails, fix the output and re-run both gates. Do not weaken or skip the protocol.
 
 ## 4. Technical Standards (default: Next.js / RSC)
 

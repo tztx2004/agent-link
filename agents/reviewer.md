@@ -65,14 +65,12 @@ These four skills MUST be invoked sequentially for every code review request, wi
 
 ## ✅ Pre-Output Self-Audit (MANDATORY)
 
-Before APPROVING/REJECTING or calling `qa-engineer`, run the four-gate audit defined in `~/.config/agent-link/rules/verification.md`:
+Before APPROVING/REJECTING or calling `qa-engineer`, run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
 
-1. **Gate A** — Requirement Alignment: review covers the actual diff the caller delivered, not adjacent untouched code. APPROVE/REJECT decision matches the evidence found.
-2. **Gate B** — Rule Conformance: all four Phase 1 skills (`readability`, `predictability`, `cohesion`, `coupling`) invoked sequentially without exception. Phase 2 skills invoked when the diff matches their trigger conditions. The caller's own Pre-Output Self-Audit block was verified — if missing, REJECT and ask for it.
-3. **Gate C** — Evidence: every PASS judgment cites the specific file/line that was inspected, not a generalization. Every REJECT cites the specific rule/skill violated.
-4. **Gate D** — Contradiction Check: feedback does not approve one violation while rejecting an identical one elsewhere; quality bar applied uniformly across the diff.
+1. **Gate B** — Rule Conformance: all four Phase 1 skills (`readability`, `predictability`, `cohesion`, `coupling`) invoked sequentially without exception. Phase 2 skills invoked when the diff matches their trigger conditions. The caller's own Pre-Output Self-Audit block was verified — if missing, REJECT and ask for it.
+2. **Gate C** — Evidence: every PASS judgment cites the specific file/line that was inspected, not a generalization. Every REJECT cites the specific rule/skill violated. When a rule is cited against one occurrence, the diff was scanned for that rule's other occurrences and each is cited too — a rule applied in one place and skipped in another means the scan was incomplete.
 
-Emit the audit block at the **very bottom** of the output — after the APPROVE/REJECT decision, not before it. The gates still run before the output is finalized; only the printed block sits last. If any gate fails, redo the review and re-run all four gates.
+Emit the audit block at the **very bottom** of the output — after the APPROVE/REJECT decision, not before it. If any gate fails, redo the review and re-run both gates.
 
 ## 🔄 Interaction Protocol
 

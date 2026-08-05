@@ -14,11 +14,11 @@ An orchestrator produced 7 user-facing responses in a single session but emitted
 
 ## Correct approach
 
-Emit the [Self-Audit] block with every user-facing response, without exception — printed at the **very bottom** of the output, after the response content (verification.md §3, §1 lines 15–19, §4 lines 108 and 111). The gates still RUN before the output is finalized; only the printed block sits last:
+Emit the [Self-Audit] block with every user-facing response, without exception — printed at the **very bottom** of the output, after the response content (verification.md §1 Scope, §4 Audit Output Format, §5 Hard Prohibitions). The gates still RUN before the output is finalized; only the printed block sits last:
 
-- **Output unit, not session unit.** A prior audit block in the same session does not satisfy the requirement for the current output. Gate A/C/D values change turn-by-turn and cannot be reused.
-- **Read-only responses are outputs.** Any response that contains verifiable assertions or corrects a prior statement is an output under §1 line 17 ("Any user-facing response from an agent"). The line 22 exemption ("internal exploratory reads or planning steps that do not produce an output") applies only to agent-internal steps that emit nothing to the user.
-- **No silent skipping (line 108), no collapsing (line 111).** All four gates must appear in the trace even when all pass trivially. If an environment limitation blocks a gate, state it explicitly in the block.
+- **Output unit, not session unit.** A prior audit block in the same session does not satisfy the requirement for the current output. Gate values change turn-by-turn and cannot be reused.
+- **Read-only responses are outputs.** Any response that contains verifiable assertions or corrects a prior statement is an output under §1 ("Any user-facing response from an agent"). The exemption for "internal exploratory reads or planning steps that do not produce an output" applies only to agent-internal steps that emit nothing to the user.
+- **No silent skipping, no collapsing** (§5 Hard Prohibitions). Every gate must appear in the trace even when all pass trivially. If an environment limitation blocks a gate, state it explicitly in the block.
 
 ## When to apply
 

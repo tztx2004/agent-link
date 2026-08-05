@@ -14,7 +14,7 @@ The orchestrator delegated implementation of the event schema v2.0.0 parser (T-E
 
 ## Correct approach
 
-Before delegating any implementation work, check the project's root agent-instruction file (`AGENTS.md` / `CLAUDE.md` or equivalent index) for a documented workflow order. When it mandates a docs-before-code sequence (e.g. product → goal → task-doc → implement, or an RFC/spec-first convention), write or confirm the relevant task/spec document FIRST — using the project's own doc commit convention (e.g. `SPEC:` prefix) — and only then delegate implementation (e.g. `T-<GROUP>-###:` commit). This check is part of the orchestrator's Gate A (Requirement Alignment) read step, performed before any delegation, not discovered afterward via user correction.
+Before delegating any implementation work, check the project's root agent-instruction file (`AGENTS.md` / `CLAUDE.md` or equivalent index) for a documented workflow order. When it mandates a docs-before-code sequence (e.g. product → goal → task-doc → implement, or an RFC/spec-first convention), write or confirm the relevant task/spec document FIRST — using the project's own doc commit convention (e.g. `SPEC:` prefix) — and only then delegate implementation (e.g. `T-<GROUP>-###:` commit). This check belongs in the orchestrator's Analyze step, performed before any delegation, not discovered afterward via user correction.
 
 ## When to apply
 
