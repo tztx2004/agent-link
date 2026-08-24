@@ -7,6 +7,12 @@
       "skillPath": "skills/agent-browser/SKILL.md",
       "computedHash": "ecc7641aea05f85ca3b11e7759d32aaf52fe05946ab4b63739c7bf78a41237a2"
     },
+    "bash-script-validator": {
+      "source": "akin-ozer/cc-devops-skills",
+      "sourceType": "github",
+      "skillPath": "devops-skills-plugin/skills/bash-script-validator/SKILL.md",
+      "computedHash": "e4e5e3604329e75af579953faad508318a9cec2d75e4e3b88297b0d17f9f719f"
+    },
     "cmux": {
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
@@ -42,6 +48,18 @@
       "skillPath": "frontend-fundamentals-plugin/skills/coupling/SKILL.md",
       "computedHash": "2de669a509671c65e0c674ff461dc307033cec457477b644e9c6516e40a86bdd"
     },
+    "dockerfile-validator": {
+      "source": "akin-ozer/cc-devops-skills",
+      "sourceType": "github",
+      "skillPath": "devops-skills-plugin/skills/dockerfile-validator/SKILL.md",
+      "computedHash": "ec23f10fbd7db4456df3300700eb814474c3a649c1af97a4f76dff93a91f6632"
+    },
+    "documentation-and-adrs": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-and-adrs/SKILL.md",
+      "computedHash": "7464fd2950b99fb00bbf65cab27653e0a049eef00c98927713ffdfe232a9daa9"
+    },
     "docx": {
       "source": "anthropics/skills",
       "sourceType": "github",
@@ -71,6 +89,12 @@
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "github-actions-validator": {
+      "source": "akin-ozer/cc-devops-skills",
+      "sourceType": "github",
+      "skillPath": "devops-skills-plugin/skills/github-actions-validator/SKILL.md",
+      "computedHash": "db13a64814d7b50a6ea9906e5c0171927fdf35b2796ac7ebc8b88e21561bd7c5"
     },
     "golang-patterns": {
       "source": "affaan-m/everything-claude-code",
@@ -120,6 +144,12 @@
       "skillPath": "skills/humanizer/SKILL.md",
       "computedHash": "dc8142371cd68f33c8264f9b63cfb35356bb8605b9fe10cabed62be96329213b"
     },
+    "k8s-yaml-validator": {
+      "source": "akin-ozer/cc-devops-skills",
+      "sourceType": "github",
+      "skillPath": "devops-skills-plugin/skills/k8s-yaml-validator/SKILL.md",
+      "computedHash": "bb7056cb942d4265a15822628839c8940a780d369e00bcc2ef4f3792ca7203a3"
+    },
     "playwright": {
       "source": "bobmatnyc/claude-mpm-skills",
       "sourceType": "github",
@@ -142,6 +172,12 @@
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
       "computedHash": "5942b70ca8cced64e6a7d5b222d6fa1334af253c00768079fc692cd914503923"
+    },
+    "spec-driven-development": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/spec-driven-development/SKILL.md",
+      "computedHash": "2dee9aa940633b7b5e0f45be34839ab31c0de98d482e16772c5cd350f4b91b4b"
     },
     "tanstack-query": {
       "source": "tanstack-skills/tanstack-skills",

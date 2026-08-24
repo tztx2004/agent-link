@@ -53,6 +53,7 @@ Verify the result actually works. No success claim without artifacts.
 - [ ] For UI changes: produce a screenshot or browser-driven verification when feasible.
 - [ ] For configuration / rules / agent files: re-read the final file and confirm intended structure is present.
 - [ ] **Audit every progress or completion claim against a tool result from this session.** Report only work you can point to evidence for; where something is not yet verified, say so explicitly rather than implying it passed.
+- [ ] **Any list of changed files you report — in a summary, a handoff, or a completion message — comes from `git diff --name-only` (or `git status --short`), not from memory.** Recalled lists run short: work done early in a long task drops out of the recollection while reading as complete.
 - [ ] When a governing rule was added or strengthened, the evidence is a **sweep of the code under that rule's scope** — "zero violations across the files checked", citing them — not a formatter or linter pass.
 - [ ] If verification is not possible in this environment, state the limitation explicitly — do NOT claim success.
 
