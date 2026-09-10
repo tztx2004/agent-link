@@ -3,6 +3,7 @@ set -euo pipefail
 
 AGENT_LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
+CODEX_DIR="$HOME/.codex"
 GEMINI_DIR="$HOME/.gemini/config"
 
 GREEN='\033[0;32m'
@@ -43,6 +44,13 @@ for skill in "$AGENT_LINK_DIR/.agents/skills"/*; do
   link "$skill" "$CLAUDE_DIR/skills/$(basename "$skill")"
 done
 
+echo "==> [Codex] Linking skills..."
+mkdir -p "$CODEX_DIR/skills"
+for skill in "$AGENT_LINK_DIR/.agents/skills"/*; do
+  [ -d "$skill" ] || continue
+  link "$skill" "$CODEX_DIR/skills/$(basename "$skill")"
+done
+
 echo "==> [Gemini/Antigravity] Linking agents..."
 mkdir -p "$GEMINI_DIR/agents"
 for agent in "$AGENT_LINK_DIR/agy-agents"/*.md; do
@@ -66,4 +74,3 @@ done
 
 echo ""
 echo "Done."
-
