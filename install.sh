@@ -3,7 +3,7 @@ set -euo pipefail
 
 AGENT_LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
-CODEX_DIR="$HOME/.codex"
+CODEX_DIR="${CODEX_HOME:-$HOME/.codex}"
 GEMINI_DIR="$HOME/.gemini/config"
 
 GREEN='\033[0;32m'
@@ -49,6 +49,16 @@ mkdir -p "$CODEX_DIR/skills"
 for skill in "$AGENT_LINK_DIR/.agents/skills"/*; do
   [ -d "$skill" ] || continue
   link "$skill" "$CODEX_DIR/skills/$(basename "$skill")"
+done
+
+echo "==> [Codex] Linking global instructions..."
+link "$AGENT_LINK_DIR/codex/AGENTS.md" "$CODEX_DIR/AGENTS.md"
+
+echo "==> [Codex] Linking agents..."
+mkdir -p "$CODEX_DIR/agents"
+for agent in "$AGENT_LINK_DIR/codex-agents"/*.toml; do
+  [ -e "$agent" ] || continue
+  link "$agent" "$CODEX_DIR/agents/$(basename "$agent")"
 done
 
 echo "==> [Gemini/Antigravity] Linking agents..."
