@@ -1,5 +1,11 @@
 # Codex Multi-Agent Workflow
 
+## Global Conventions
+
+- Always respond to the user in Korean.
+- Name `.tsx` files in PascalCase, for example `UserCard.tsx` and `AuthModal.tsx`.
+- Name `.ts` files in camelCase, for example `useUser.ts` and `fetchOrders.ts`.
+
 The primary Codex thread is the default orchestrator. It owns task classification, delegation, progress tracking, result consolidation, and the final response.
 
 Do not spawn the `orchestrator` custom agent as an intermediate layer unless the user explicitly requests that agent. Prefer direct delegation from the primary thread to the smallest useful set of specialists.

@@ -1,6 +1,6 @@
 # Verification Protocol (Constitutional Self-Audit)
 
-Every agent MUST run this protocol **after producing an internal result and before emitting any output, handoff, or completion claim**. The workflow is:
+Every agent MUST run this protocol **after producing an internal result and before emitting any code-modifying output, handoff, or completion claim**. The workflow is:
 
 ```
 Think → Implement/Result → VERIFY (this protocol) → Output
@@ -12,34 +12,28 @@ This is non-negotiable. If an audit gate fails, **fix the output first, then re-
 
 ## 1. Scope
 
-This protocol applies to:
+This protocol applies strictly to:
 
-- Any user-facing response from an agent
-- Any `<handoff>` to another agent
-- Any code edit, file write, or shell command sequence that produces a result
-- Any "task complete" / "fixed" / "passing" claim
+- Any code edit, file write, or configuration change producing modified artifacts
+- Any `<handoff>` to an implementation or verification agent
+- Any completion claim ("task complete", "fixed", "passing")
 
-It does NOT apply to internal exploratory reads or planning steps that do not produce an output.
+It does **NOT** apply to:
+- Pure Q&A, explanations, investigations, read-only research, or planning turns where no code or file was modified. (Audit blocks are EXEMPT for these turns to maintain fluid conversation).
 
 ---
 
 ## 2. The Two Audit Gates
 
-Run each gate in order. Each gate must produce an explicit ✓ or ✗ in your reasoning trace. Do not collapse the two gates into a single judgment.
-
-Both surviving gates are **externally grounded**: each one is discharged by opening a file, citing a clause, or running a command — never by re-reading your own output and judging it. That is the whole design. Anything you can satisfy by thinking harder about what you already wrote does not belong here.
+Run each gate in order for any code-modifying turn.
 
 ### Gate B — Rule Conformance (규칙 검증)
 
-Verify the result complies with every rule that governs this agent and this file type.
+Verify that the output complies with the project's governing rules, architecture patterns, and technical standards.
+- Confirm standard compliance (Next.js/React patterns, Go idioms, security rules).
+- Review relevant lessons in `feedback/INDEX.md` when touching risk areas. (Full lesson bodies are consulted on-demand when relevant, not blindly read all at once).
 
-- [ ] List the rule files I loaded this turn (e.g., `core_rules.md`, `react_patterns.md`, `style_guidelines.md`, `tanstack_query.md`, agent-specific rules in frontmatter).
-- [ ] For each rule that touches the changed code, cite the specific clause and confirm the output complies.
-- [ ] For each mandatory skill listed in the agent's frontmatter, confirm it was invoked at the required step.
-- [ ] If a rule is ambiguous, document the interpretation chosen and why.
-- [ ] Load `feedback/INDEX.md` if not already loaded. List EVERY lesson whose `scope` matches this work (include `universal` always). The INDEX one-liner is a lossy pointer, **not** a substitute for the lesson — for EACH match you MUST **open and read the full `feedback/lessons/<file>.md` body** and cite the body file path you opened in your audit. Confirm the output does not repeat the recorded mistake.
-
-**Fail conditions:** a governing rule was not loaded; a loaded rule is violated by the output; **or** a scope-matching lesson was complied with / cited from the INDEX summary alone without its `lessons/<file>.md` body being opened and cited.
+**Fail condition:** a governing rule is violated by the output without explicit documented rationale.
 
 ### Gate C — Evidence (결과 검증)
 
@@ -75,7 +69,7 @@ Letters **B and C were deliberately not renumbered** so existing references stay
 
 Run both gates **before finalizing** the output — problems must be found and fixed before anything is emitted. Verification always happens first; only the **printed block's position** changes.
 
-Place the `[Self-Audit]` block at the **very bottom of the output** — it is the LAST element the reader sees, printed _after_ the user-facing response (or after the `<handoff>` payload, PASS/FAIL, or APPROVE/REJECT decision). Keep it terse — one line per gate.
+Place the `[Self-Audit]` block at the **very bottom of any code-modifying output or handoff** — it is the LAST element the reader sees, printed _after_ the user-facing response (or after the `<handoff>` payload, PASS/FAIL, or APPROVE/REJECT decision). Keep it terse — one line per gate. (Pure conversational/Q&A turns omit this block).
 
 ```
 [Self-Audit]
@@ -100,7 +94,7 @@ After remediation, re-run **both** gates — not just the failed one. Fixes can 
 - **No silent skipping.** If an environment limitation prevents a gate (e.g., no test runner available), state it explicitly in the audit block.
 - **No rule rewriting to pass the audit.** Rules in `rules/` and skill files are immutable during a task. If a rule seems wrong, finish the task as-is and flag the rule in the final report.
 - **No partial completion claims.** "Mostly works" / "should work" / "looks correct" are forbidden. Either evidence shows it works, or you state it does not.
-- **No collapsing the audit.** Both gates must appear in the trace, even if both pass trivially.
+- **No collapsing the audit.** Both gates must appear in the audit block, even if both pass trivially.
 
 ---
 

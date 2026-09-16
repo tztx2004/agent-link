@@ -8,6 +8,8 @@ scope: universal
 status: active
 ---
 
+> 💡 **2026-09 개정 (Harness Diet)**: `verification.md` §1이 개정되어, 순수 Q&A, 조사, 기획 등 코드 비수정 대화 턴은 `[Self-Audit]` 블록 출력이 면제됩니다. 본 레슨의 '출력 단위 적용' 원칙은 **코드/설정 수정이 포함된 산출물 턴 및 핸드오프**에 적용됩니다.
+
 ## Symptom (What went wrong)
 
 An orchestrator produced 7 user-facing responses in a single session but emitted the [Self-Audit] four-gate block only once, at the end of the session, as a retrospective summary. Individual responses — including read-only investigation turns — were not accompanied by an audit block. The root causes were two misclassifications: (1) treating the audit as a once-per-session ritual rather than a once-per-output requirement, and (2) treating "read-only / investigation responses" as internal exploratory steps exempt under verification.md §1 line 22.

@@ -3,7 +3,7 @@ set -euo pipefail
 
 AGENT_LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
-CODEX_DIR="${CODEX_HOME:-$HOME/.codex}"
+CODEX_DIR="$HOME/.codex"
 GEMINI_DIR="$HOME/.gemini/config"
 
 GREEN='\033[0;32m'

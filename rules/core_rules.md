@@ -7,17 +7,18 @@
 
 ## 2. Operational Mandates (Role & Workflow)
 
-- **Orchestrator (Leader)**: Thought and Leadership first. Focus on planning, delegation, and refining the loop based on failure reports. **Delegate implementation by default.** Direct code modification is allowed under the **Simple-Task Exception** — no hard block in `agents/orchestrator.md` § Protocol › Simple Task applies (core logic/API/schema/auth/pipeline risk, new or bumped dependency, open design decision, governing-rule change with existing-code impact), and the orchestrator can state in one line why the change is low-risk. When a hard block applies, delegate.
-- **Sub-agents (Execution)**: Perform tasks strictly according to the rules and assigned scope.
-- **Reviewer (Quality)**: MUST verify every code change for **Readability, Predictability, Cohesion, and Coupling.** Code must always be easy to refactor and maintain.
-- **QA-Engineer (Final Gate)**: Verify that the final implementation matches the original task requirements. Only a PASS from QA signifies task completion.
+- **Orchestrator (Leader)**: Strategic planning, high-level architecture, and task distribution.
+  - **Focused / Bounded tasks**: Can be implemented directly by the active agent or single subagent, verifying with lint/tests without multi-agent chain overhead.
+  - **Large-scale / Parallel tasks**: Decomposed and delegated across specialized subagents (Frontend, Backend, etc.).
+- **Sub-agents (Execution)**: Perform tasks strictly according to assigned scope and verify their own work.
+- **Reviewer & QA**: Utilized for complex multi-agent milestones or pull-request readiness checks.
 
-## 3. Verification Protocol (MANDATORY for every agent)
+## 3. Verification Protocol (Grounded in Evidence)
 
-- **Workflow**: `Think → Implement/Result → VERIFY → Output`. Every agent MUST run the verification protocol before any output, handoff, or completion claim.
-- **Source**: `~/.config/agent-link/rules/verification.md`. Load this file at session start alongside this `core_rules.md`.
-- **Two Gates**: (B) Rule Conformance, (C) Evidence. Both must pass and be reported in the audit block. Gates A and D were retired — see `verification.md` §3.
-- **No bypass**: If a gate fails, fix the output and re-run both gates. Do not weaken or skip the protocol.
+- **Workflow**: `Think → Implement → VERIFY (commands/tests) → Output`.
+- **Scope**: Mandatory for all code modifications, file writes, and completion claims. (Conversational turns exempt from audit blocks).
+- **Two Gates**: (B) Rule Conformance, (C) Evidence (real command outputs).
+- **Source**: `~/.config/agent-link/rules/verification.md`.
 
 ## 4. Technical Standards (default: Next.js / RSC)
 
@@ -35,8 +36,7 @@
 
 ## 6. Feedback Ledger (Recurrence Prevention)
 
-- **Every agent loads at session start**: `~/.config/agent-link/feedback/INDEX.md`, alongside the rule files. It lists durable lessons learned from past corrections and recurring failures.
-- **The INDEX one-liner is a lossy pointer, not the lesson.** It is for `scope` triage only and must never be acted on or cited by itself.
-- **Honor lessons**: during Gate B, for every lesson whose `scope` matches the current work, **open and read its full `feedback/lessons/<file>.md` body** (not just the INDEX summary), cite the body path in the Gate B audit line, and ensure the output complies. Lessons carry the same force as rules. Complying from the summary alone is a Gate B failure.
-- **Capture**: when a user explicitly corrects a result, or the same gate FAILs 2+ times on one ticket, the Orchestrator delegates to the `retrospective` agent to record the lesson.
-- **Never auto-promote**: a lesson becomes a rule only with explicit human approval.
+- **Reference**: `~/.config/agent-link/feedback/INDEX.md` lists durable lessons learned from past corrections and recurring failures.
+- **Honor lessons**: When touching areas related to recorded lessons (e.g. rename operations, loading UX, branch commits), ensure compliance with the lesson guidelines. Detailed lesson bodies in `feedback/lessons/` are consulted on-demand when relevant.
+- **Capture**: When a user explicitly corrects a result or recurring failures occur, record the durable lesson.
+- **Never auto-promote**: A lesson becomes a rule only with explicit human approval.
