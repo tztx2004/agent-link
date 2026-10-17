@@ -110,7 +110,7 @@ func TestCalculateDiscount(t *testing.T) {
 
 ## 4. Verification Gate Integration
 
-When completing any Go implementation or review, evaluate the following in the constitutional self-audit:
+When completing any Go implementation or review, check the following before writing the Verification section:
 
 ### Gate B — Rule Conformance (Go Standards)
 - [ ] Error wrapping: errors wrapped with `%w` and descriptive prefix.

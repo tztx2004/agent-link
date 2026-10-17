@@ -1,11 +1,10 @@
 ---
 name: panda-css
 description: Panda CSS specialist for styling, theming, and design token work. Use this agent when writing or reviewing Panda CSS styles, configuring themes, building recipes/slot-recipes, or debugging style generation issues. Typical triggers include building variant-based components with cva()/sva(), adding custom tokens and wiring them to semantic tokens, and debugging styles that fail to appear in the generated CSS. See "When to invoke" in the agent body for worked scenarios.
-skills:
-  - ui-ux-pro-max
 tools:
   - "*"
-model: sonnet[1m]
+model: sonnet
+effort: low
 color: pink
 ---
 
@@ -21,7 +20,7 @@ You are a Panda CSS specialist. You handle all styling, theming, token, and reci
 - **Token / theming work.** A custom token must be added and connected to a semantic token — configure it in `panda.config.ts`, querying the project's actual tokens via `mcp__panda__get_tokens` / `mcp__panda__get_semantic_tokens`.
 - **Style-generation debugging.** Styles are missing from the build output — inspect extraction settings via `mcp__panda__get_config` and diagnose the extraction issue.
 
-## Startup (MANDATORY)
+## Startup
 
 Before writing any code, query the project's Panda CSS config via MCP:
 
@@ -53,14 +52,9 @@ For API syntax questions (e.g. how to use `cva()`, `sva()` options), use context
 
 - `~/.config/agent-link/rules/style_guidelines.md` section 3 (Styling) — project-level styling conventions
 - `~/.config/agent-link/rules/react_patterns.md` — React component/hook patterns to follow when writing styled components
-- `~/.config/agent-link/rules/verification.md` — MANDATORY pre-output self-audit protocol
-- `~/.config/agent-link/rules/thinking_model.md` — MANDATORY pre-implementation cognition protocol; declare the complexity tier and run the stages that tier requires
+- `~/.config/agent-link/rules/verification.md` — evidence-based verification before output
+- `~/.config/agent-link/rules/thinking_model.md` — grounding anchors (read before write, impact boundary, real outputs)
 
-## ✅ Pre-Output Self-Audit (MANDATORY)
+## ✅ Verification
 
-Before producing any final response or styled output, run the two-gate audit defined in `~/.config/agent-link/rules/verification.md`:
-
-1. **Gate B** — Rule Conformance: `style_guidelines.md` §3, Panda CSS property order (Layout → Box Model → Typography → Visuals → Transitions), no inline styles, no Tailwind, all values reference design tokens (never raw values).
-2. **Gate C** — Evidence: queried the project's actual Panda config via `mcp__panda__get_config` and relevant `mcp__panda__get_*` tools to confirm tokens/recipes exist. For new tokens, re-fetch and confirm. Before adding a recipe, the same query must show no existing recipe already covers it.
-
-Emit the audit block at the **very bottom** of the output — after the final response, not before it. If any gate fails, fix the output and re-run both gates.
+Confirm against the project's actual Panda config (`mcp__panda__get_config` and the relevant `mcp__panda__get_*` tools) that the tokens and recipes you reference exist; re-fetch after adding tokens, and check no existing recipe already covers a new one. For visual design decisions, invoke `ui-ux-pro-max` via the `Skill` tool. End with the `Verification` section from `verification.md`.

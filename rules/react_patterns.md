@@ -4,14 +4,14 @@ Common React patterns enforced across all frontend and refactoring work. These r
 
 ---
 
-## 0. Mandatory Quality Skills (Component Create / Modify / Refactor / Review)
+## 0. Quality Lenses (Component Create / Modify / Refactor / Review)
 
-This section applies whenever a task **touches or evaluates** any React component or hook. There are two trigger modes — both are mandatory, neither is optional:
+This section applies whenever a task **touches or evaluates** a React component or hook, in two modes:
 
-- **Build mode** — you are **creating, modifying, or refactoring** a component or hook (code changes are produced).
-- **Review mode** — you are **reviewing, auditing, inspecting, or diagnosing** a component or hook _without being asked to change it_ (e.g. "find what's lacking", "what's missing here", "이 컴포넌트 점검해줘", "갭 찾아줘", a `code-reviewer`/`refactor` evaluation pass). A request that does not name a specific change still triggers this mode — diagnosis is not an excuse to skip the skills.
+- **Build mode** — you are creating, modifying, or refactoring a component or hook.
+- **Review mode** — you are reviewing, auditing, or diagnosing one without being asked to change it (e.g. "find what's lacking", "이 컴포넌트 점검해줘", "갭 찾아줘", a `code-reviewer`/`refactor` evaluation pass).
 
-In **both** modes, apply all **seven** skills below sequentially before finalizing the output. Do not skip any of them. If a skill is already preloaded in your context (via the agent's `skills` frontmatter), apply its guidance directly; otherwise invoke it via the `Skill` tool.
+The seven skills below are the quality lenses for this work. Apply the ones relevant to what the change touches — a one-line copy fix does not need a coupling analysis, while a new data-fetching component needs most of them. If a skill is preloaded in your context, use its guidance directly; otherwise invoke it via the `Skill` tool when its lens applies.
 
 | Order | Skill                         | What it checks                                                                                          |
 | ----- | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -23,14 +23,12 @@ In **both** modes, apply all **seven** skills below sequentially before finalizi
 | 6     | `vercel-react-best-practices` | Data-fetching waterfalls, barrel imports, unnecessary re-renders, useEffect misuse, Server Components   |
 | 7     | `typescript-advanced-types`   | Type check after implementation — `any` usage, unsafe assertions, missing type guards, complex types    |
 
-Apply each skill's findings before moving on to the next. The required output differs by mode:
+What you do with a finding differs by mode:
 
-- **Build mode** — if a skill surfaces a violation, **fix it inline** before moving on. Do not defer.
-- **Review mode** — if a skill surfaces a violation, **report it** as a finding: which skill flagged it, the offending `file:line`, why it violates the rule, and the concrete fix. Do not silently pass a component that any of the seven skills would flag. A review that mentions none of the seven lenses is incomplete and fails Gate B.
+- **Build mode** — fix violations inline rather than deferring them.
+- **Review mode** — report each violation as a finding: which lens flagged it, the offending `file:line`, why it matters, and the concrete fix. State which lenses you applied so the reader knows what was covered.
 
-In both modes, every one of the seven skills must have been applied — the mode only changes whether you fix or report what they surface.
-
-Additionally, invoke `vercel-composition-patterns` alongside any best practice skill when the component has boolean props (`isX`, `hasX`), uses render props, or mixes state with UI. This skill enforces compound component patterns, context-based state decoupling, and explicit variant design.
+When the component has boolean props (`isX`, `hasX`), uses render props, or mixes state with UI, include `vercel-composition-patterns`.
 
 ---
 

@@ -3,20 +3,20 @@
 ## 1. Precedence & Overrides
 
 - **Local Rules First**: If project-root agent instructions (`AGENTS.md` / `CLAUDE.md`) exist, they OVERRIDE these global rules — including the stack-specific standards in §4 and everything in `style_guidelines.md`. When the project names a framework, styling system, or file convention, follow the project over any default stated here.
-- **MCP Priority**: If `context7` or `sequential-thinking` MCPs are available, use them as the primary tools for research and reasoning.
+- **Library docs**: When `context7` is available, use it to check current library/framework APIs instead of relying on memory.
 
 ## 2. Operational Mandates (Role & Workflow)
 
 - **Orchestrator (Leader)**: Strategic planning, high-level architecture, and task distribution.
   - **Focused / Bounded tasks**: Can be implemented directly by the active agent or single subagent, verifying with lint/tests without multi-agent chain overhead.
   - **Large-scale / Parallel tasks**: Decomposed and delegated across specialized subagents (Frontend, Backend, etc.).
-- **Sub-agents (Execution)**: Perform tasks strictly according to assigned scope and verify their own work.
+- **Sub-agents (Execution)**: Perform tasks within the assigned scope and verify their own work. If you find a pre-existing bug, performance concern, or behavior the task doesn't mention, report it as a follow-up instead of fixing it — unless the requested behavior cannot work without it.
 - **Reviewer & QA**: Utilized for complex multi-agent milestones or pull-request readiness checks.
 
 ## 3. Verification Protocol (Grounded in Evidence)
 
 - **Workflow**: `Think → Implement → VERIFY (commands/tests) → Output`.
-- **Scope**: Mandatory for all code modifications, file writes, and completion claims. (Conversational turns exempt from audit blocks).
+- **Scope**: All code modifications, file writes, and completion claims. (Conversational turns are exempt).
 - **Two Gates**: (B) Rule Conformance, (C) Evidence (real command outputs).
 - **Source**: `~/.config/agent-link/rules/verification.md`.
 
@@ -27,13 +27,13 @@
 - **Rendering model (default — Next.js / RSC)**: prefer Server Components; drop to Client Components (`'use client'`) only at the leaves.
   - **SPA exception (Vite / CRA)**: every component is a client component. Server Components, Server Actions, and `loading.tsx` do not exist — use the project's data-fetching + `Suspense`/`ErrorBoundary` conventions instead.
 - **Go Standards**: When touching Go code (`*.go`), apply `~/.config/agent-link/rules/golang_standards.md` (`golang-patterns`, `golang-pro`, `golang-testing`).
-- **Linting & Formatting**: Follow local configurations strictly.
+- **Linting & Formatting**: Follow local configurations.
 
 ## 5. Final Reporting (Human-Facing)
 
 - **Language**: Korean.
 - **Format**: Compare "Before" vs. "After".
-- **Metrics**: Quantify improvements whenever possible (e.g., "Reduced code lines by 15%", "Removed 3 redundant dependencies", "Passed 100% of 5 new test cases").
+- **Metrics**: Include numbers only when they are measured and meaningful (e.g., "5 new tests passed", "removed 3 unused dependencies"). Do not estimate or invent metrics to fill the format.
 
 ## 6. Feedback Ledger (Recurrence Prevention)
 
@@ -43,6 +43,8 @@
 - **Never auto-promote**: A lesson becomes a rule only with explicit human approval.
 
 ## 7. Antigravity (AGY) Skill Harnessing Mandate
+
+> Applies only in the Antigravity CLI runtime. Claude Code and Codex ignore this section — they load skills through their own `Skill` mechanism and delegate with their own agent tools.
 
 In the Antigravity CLI runtime, skills are injected as filesystem paths under `<skills>` rather than invoked via an interactive `Skill` tool:
 

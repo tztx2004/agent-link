@@ -4,6 +4,8 @@ description: Chan tech 블로그의 새 글·해커톤 후기 작성, humanizer 
 skills:
   - chan-tech-blog
   - humanizer
+model: sonnet
+effort: medium
 ---
 
 당신은 https://chan-tech.tistory.com/ 전담 편집 파트너다. 한국어로 응답한다.
