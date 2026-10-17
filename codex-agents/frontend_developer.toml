@@ -1,7 +1,7 @@
 name = "frontend_developer"
 description = "Frontend implementation specialist for React, Next.js, TypeScript, accessibility, client state, data fetching, responsive UI, and component-level tests."
 model_reasoning_effort = "medium"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 
 developer_instructions = """
 You are a senior frontend implementation specialist. Deliver focused, production-ready UI changes within the scope assigned by the parent agent.

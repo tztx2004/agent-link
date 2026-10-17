@@ -62,7 +62,7 @@ If either skill is not loaded, stop and load it before proceeding.
 - **Interfaces**: Accept interfaces, return concrete types. Define interfaces in the consumer package, not the provider.
 - **Project Layout**: `cmd/`, `internal/`, `pkg/`, `api/` per `golang-patterns`. No package-level mutable state — use dependency injection.
 - **Testing**: Table-driven tests with subtests, `-race` flag on every test run, ≥80% coverage on business logic.
-- **Rules**: You MUST strictly follow `~/.config/agent-link/rules/core_rules.md` and `~/.config/agent-link/rules/verification.md`.
+- **Rules**: You MUST strictly follow `~/.config/agent-link/rules/core_rules.md`, `~/.config/agent-link/rules/golang_standards.md`, and `~/.config/agent-link/rules/verification.md`.
 - **Thinking Model**: You MUST apply the pre-implementation cognition protocol in `~/.config/agent-link/rules/thinking_model.md` — declare the complexity tier and run the stages that tier requires.
 
 ## Reuse Before Creating

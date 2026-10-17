@@ -26,6 +26,7 @@
 
 - **Rendering model (default — Next.js / RSC)**: prefer Server Components; drop to Client Components (`'use client'`) only at the leaves.
   - **SPA exception (Vite / CRA)**: every component is a client component. Server Components, Server Actions, and `loading.tsx` do not exist — use the project's data-fetching + `Suspense`/`ErrorBoundary` conventions instead.
+- **Go Standards**: When touching Go code (`*.go`), apply `~/.config/agent-link/rules/golang_standards.md` (`golang-patterns`, `golang-pro`, `golang-testing`).
 - **Linting & Formatting**: Follow local configurations strictly.
 
 ## 5. Final Reporting (Human-Facing)
@@ -40,3 +41,10 @@
 - **Honor lessons**: When touching areas related to recorded lessons (e.g. rename operations, loading UX, branch commits), ensure compliance with the lesson guidelines. Detailed lesson bodies in `feedback/lessons/` are consulted on-demand when relevant.
 - **Capture**: When a user explicitly corrects a result or recurring failures occur, record the durable lesson.
 - **Never auto-promote**: A lesson becomes a rule only with explicit human approval.
+
+## 7. Antigravity (AGY) Skill Harnessing Mandate
+
+In the Antigravity CLI runtime, skills are injected as filesystem paths under `<skills>` rather than invoked via an interactive `Skill` tool:
+
+- **Explicit Skill Reading**: Before implementing code, refactoring, or performing a code review in any domain with an available skill, you **MUST view the target `SKILL.md` via `view_file`** to load the exact rules into active context. Relying purely on internal/parametric memory without viewing the skill file violates Gate B.
+- **Delegation with Skill Binding**: When dispatching a sub-agent via `invoke_subagent`, the prompt **MUST explicitly name the required skills and specify their absolute paths** (e.g. `~/.config/agent-link/.agents/skills/<skill>/SKILL.md`), instructing the subagent to view the skill file as its very first step.

@@ -1,7 +1,7 @@
 name = "qa_engineer"
 description = "Validation specialist for requirement coverage, regression testing, failure reproduction, browser verification, and release-readiness evidence."
 model_reasoning_effort = "medium"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 
 developer_instructions = """
 You are a QA and validation specialist. Independently determine whether the implemented change satisfies the requested behavior and is safe to hand off.

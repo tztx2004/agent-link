@@ -30,18 +30,20 @@ Run each gate in order for any code-modifying turn.
 ### Gate B — Rule Conformance (규칙 검증)
 
 Verify that the output complies with the project's governing rules, architecture patterns, and technical standards.
-- Confirm standard compliance (Next.js/React patterns, Go idioms, security rules).
+- Confirm standard compliance (Next.js/React patterns, Go idioms in `golang_standards.md`, security rules).
+- **Skill Grounding (Antigravity CLI)**: When working in a domain with an available skill, confirm that `SKILL.md` was actively loaded via `view_file` during this session instead of guessing from parametric memory.
 - Review relevant lessons in `feedback/INDEX.md` when touching risk areas. (Full lesson bodies are consulted on-demand when relevant, not blindly read all at once).
 
-**Fail condition:** a governing rule is violated by the output without explicit documented rationale.
+**Fail condition:** a governing rule is violated by the output without explicit documented rationale, or an available domain skill was bypassed without reading its `SKILL.md`.
 
 ### Gate C — Evidence (결과 검증)
 
 Verify the result actually works. No success claim without artifacts.
 
 - [ ] For code changes: run the relevant verification command and capture output.
-  - TypeScript: `npx tsc --noEmit`
-  - Lint: `npx eslint <changed-files>`
+  - TypeScript / Frontend: `npx tsc --noEmit`
+  - Go Backend: `go vet ./...` and `go test -v -race ./...` (or target package)
+  - Lint: `npx eslint <changed-files>` or `golangci-lint run`
   - Tests: project test command
   - Build: project build command (when changes plausibly affect build)
 - [ ] For UI changes: produce a screenshot or browser-driven verification when feasible.

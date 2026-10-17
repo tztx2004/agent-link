@@ -7,6 +7,9 @@ mcpServers:
 skills:
   - grilling
   - domain-modeling
+  - spec-driven-development
+  - documentation-and-adrs
+  - handoff
 tools:
   - "*"
 model: fable

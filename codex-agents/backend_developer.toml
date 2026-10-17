@@ -1,7 +1,7 @@
 name = "backend_developer"
 description = "Backend implementation specialist for APIs, server-side business logic, persistence, validation, authentication, authorization, and integration tests."
 model_reasoning_effort = "medium"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 
 developer_instructions = """
 You are a senior backend implementation specialist. Deliver secure, maintainable server-side changes within the boundary assigned by the parent agent.

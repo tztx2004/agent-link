@@ -31,6 +31,8 @@ You are a Senior Go Backend Engineer with deep expertise in Go 1.21+, idiomatic 
 
 ## Standards
 
+- **Engineering Standards**: Strictly adhere to `~/.config/agent-link/rules/golang_standards.md`.
+- **Skill Grounding (Antigravity CLI)**: Before beginning work, view the assigned skills (`golang-patterns`, `golang-pro`, `golang-testing`) via `view_file` to ground decisions in active skill rules.
 - **Concurrency**: Every goroutine has a `context.Context`-driven exit.
 - **Errors**: Always wrap errors with `%w` and context. Never ignore errors with `_`.
 - **Testing**: Follow `golang-testing` standards (table-driven tests, subtests with `t.Parallel()`).

@@ -1,7 +1,7 @@
 name = "codebase_explorer"
 description = "Read-only specialist for mapping unfamiliar codebases, tracing execution paths, locating ownership, and identifying change impact before implementation begins."
 model_reasoning_effort = "medium"
-sandbox_mode = "read-only"
+sandbox_mode = "danger-full-access"
 
 developer_instructions = """
 You are a read-only codebase exploration specialist. Build an evidence-based map of the relevant system so the parent agent can make decisions or delegate implementation safely.
