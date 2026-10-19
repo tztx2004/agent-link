@@ -14,34 +14,32 @@ Do not spawn the `orchestrator` custom agent as an intermediate layer unless the
 
 Classify each task before acting. File count and line count are supporting signals, not deciding factors. Base the decision on ownership boundaries, risk, uncertainty, verification needs, and whether delegation materially improves quality or latency.
 
-### Direct Execution
+### Direct Execution (Autonomy)
 
-Handle a task directly when all of the following are true:
+Handle a task directly from the primary thread or active agent for focused, bounded, or single-domain tasks:
 
-- The requirement and target location are clear.
-- The change belongs to one ownership area.
-- No architecture, public-contract, data-migration, authentication, authorization, security, infrastructure, concurrency, transaction-integrity, or dependency decision is required.
-- Verification is narrow and deterministic.
-- Delegation would not materially improve quality or latency.
+- The requirement and target scope are clear.
+- Implement directly using local tools and verify with empirical command outputs (tests, linter, build) without multi-agent chain overhead.
+- Do not delegate routine tasks, localized edits, or well-bounded bug fixes where delegation adds unnecessary latency, tokens, and coordination overhead.
 
 ### Single-Specialist Delegation
 
-Delegate to one specialist when the task belongs to one clear domain and that specialist's focused instructions would materially improve the result:
+Delegate to one specialist when the task belongs to one clear domain and that specialist's focused instructions or skills would materially improve the result:
 
 - Repository exploration, execution tracing, ownership mapping, or impact analysis: `codebase_explorer`.
 - React, Next.js, TypeScript UI, accessibility, client behavior, or frontend tests: `frontend_developer`.
 - APIs, server-side logic, persistence, validation, authentication, authorization, or backend tests: `backend_developer`.
-- Independent review of an existing change: `code_reviewer`.
-- Requirement validation, regression testing, browser verification, or defect reproduction: `qa_engineer`.
+- Independent review of an existing change (when high-risk or requested): `code_reviewer`.
+- Acceptance validation, regression testing, or defect reproduction (when high-risk or requested): `qa_engineer`.
 
 ### Multi-Agent Orchestration
 
-Use a multi-agent workflow when a hard-risk condition applies or when at least two of the following are true:
+Use a multi-agent workflow only when a hard-risk condition applies or when at least two of the following are true:
 
 - The task contains two or more independent workstreams.
 - The change spans multiple ownership areas, packages, services, or technical domains.
 - Repository exploration is required before implementation ownership is clear.
-- Independent implementation, review, and QA stages are required.
+- Independent implementation, review, and QA stages are explicitly required by high-risk boundaries.
 - Parallel read-heavy work would materially reduce latency or keep noisy evidence out of the primary context.
 - Multiple agents must preserve a shared interface or contract.
 
@@ -59,10 +57,10 @@ Hard-risk conditions include authentication, authorization, payments, database m
 - Wait for every requested result before consolidating the current work wave.
 - Preserve user changes and do not expand scope through delegation.
 
-## Review and QA Gates
+## Review and QA Gates (Selective)
 
-- Route material production-code changes through `code_reviewer` after implementation.
-- After review is acceptable, route user-facing, contract-sensitive, or otherwise material behavior through `qa_engineer`.
-- If review or QA finds a reproducible defect, return the smallest remediation task to the responsible implementation specialist.
+- **Selective invocation**: Route through `code_reviewer` and `qa_engineer` only for high-risk changes (e.g., authentication, security boundaries, database migrations, public API breaking changes) or when explicitly requested by the user.
+- **Self-verification for routine tasks**: For standard, focused, or low-risk implementations, empirical self-verification with real command outputs (tests, linter, typecheck, build) by the implementer is sufficient. Do not add review/QA chain overhead for routine tasks.
+- If an invoked review or QA finds a reproducible defect, return the smallest remediation task to the responsible implementation specialist.
 - Request targeted re-review and repeat only the necessary QA checks after remediation.
 - Do not claim completion while a required review or QA gate is failing or remains unverified.
