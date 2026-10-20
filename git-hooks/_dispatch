@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Global git hook dispatcher, installed via `core.hooksPath` by agent-link/install.sh.
+# Every hook name in this directory is a symlink to this file.
+#
+# 1. Guards the default branch: blocks direct commits/pushes to main or master,
+#    unless the repo opts out with `git config agentlink.allowMain true`.
+# 2. Chains to the repo's own .git/hooks/<name>, because a global hooksPath
+#    otherwise silently disables per-repo hooks (git-lfs, plain scripts).
+set -euo pipefail
+
+hook_name=$(basename "$0")
+zero_sha=0000000000000000000000000000000000000000
+
+stdin_data=""
+if [ "$hook_name" = "pre-push" ]; then
+  stdin_data=$(cat)
+fi
+
+is_protected() {
+  case "$1" in main | master) return 0 ;; *) return 1 ;; esac
+}
+
+allow_main() {
+  [ "$(git config --bool agentlink.allowMain 2>/dev/null || echo false)" = "true" ]
+}
+
+block() {
+  echo "✋ [agent-link git hook] $1" >&2
+  echo "   Work on a branch and merge through a PR: git switch -c <branch>" >&2
+  echo "   To allow direct main commits in this repo: git config agentlink.allowMain true" >&2
+  exit 1
+}
+
+case "$hook_name" in
+  pre-commit)
+    # The initial commit of a new repo (no HEAD yet) is allowed.
+    if ! allow_main && git rev-parse --verify -q HEAD >/dev/null; then
+      branch=$(git symbolic-ref --short -q HEAD || true)
+      if [ -n "$branch" ] && is_protected "$branch"; then
+        block "Direct commit to '$branch' is blocked."
+      fi
+    fi
+    ;;
+  pre-push)
+    if ! allow_main; then
+      while read -r _local_ref _local_sha remote_ref remote_sha; do
+        [ -n "${remote_ref:-}" ] || continue
+        branch=${remote_ref#refs/heads/}
+        # Creating the branch on a fresh remote (first push) is allowed.
+        if [ "$branch" != "$remote_ref" ] && is_protected "$branch" && [ "$remote_sha" != "$zero_sha" ]; then
+          block "Direct push to '$branch' is blocked."
+        fi
+      done <<<"$stdin_data"
+    fi
+    ;;
+esac
+
+# `git rev-parse --git-path hooks` would resolve back to this directory, so use the common dir.
+local_hook="$(git rev-parse --git-common-dir)/hooks/$hook_name"
+if [ -x "$local_hook" ] && [ "$(cd "$(dirname "$local_hook")" && pwd -P)" != "$(cd "$(dirname "$0")" && pwd -P)" ]; then
+  if [ "$hook_name" = "pre-push" ]; then
+    if [ -n "$stdin_data" ]; then
+      printf '%s\n' "$stdin_data" | "$local_hook" "$@"
+    else
+      "$local_hook" "$@" </dev/null
+    fi
+  else
+    exec "$local_hook" "$@"
+  fi
+fi
+exit 0

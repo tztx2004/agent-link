@@ -39,6 +39,7 @@
 ## 6. Feedback Ledger (Recurrence Prevention)
 
 - **Reference**: `~/.config/agent-link/feedback/INDEX.md` lists durable lessons learned from past corrections and recurring failures.
+- **Branch guard hook**: A global git hook blocks direct commits/pushes to `main`/`master` (repos opt out with `git config agentlink.allowMain true`). When it blocks you, switch to a branch — never bypass it with `--no-verify` or by editing git config unless the user explicitly asks.
 - **Honor lessons**: When touching areas related to recorded lessons (e.g. rename operations, loading UX, branch commits), ensure compliance with the lesson guidelines. Detailed lesson bodies in `feedback/lessons/` are consulted on-demand when relevant.
 - **Capture**: When a user explicitly corrects a result or recurring failures occur, record the durable lesson.
 - **Never auto-promote**: A lesson becomes a rule only with explicit human approval.

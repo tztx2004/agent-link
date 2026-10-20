@@ -2,5 +2,5 @@
 
 ## Branch & Commit Policy
 
-- **Direct Main Commits Allowed**: This repository (`agent-link`) is a personal dotfile and agent configuration repository. Direct commits to `main` are permitted without creating task branches or pull requests.
+- **Direct Main Commits Allowed**: This repository (`agent-link`) is a personal dotfile and agent configuration repository. Direct commits and pushes to `main` are permitted without creating task branches or pull requests. The global git hook (`git-hooks/_dispatch`) honors this through the repo-local `git config agentlink.allowMain true`, which `install.sh` sets.
 - This local rule explicitly overrides the universal branch-checking lesson (`feedback/lessons/2026-07-22-verify-branch-before-commit.md`) for this repository.

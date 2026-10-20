@@ -137,5 +137,18 @@ for existing_link in "$GEMINI_DIR/rules"/*.md; do
 done
 prune_orphaned_links "$GEMINI_DIR/rules" "$AGENT_LINK_DIR/rules"
 
+echo "==> [Git] Installing global hooks (shared by Claude / Codex / AGY)..."
+HOOKS_DIR="$AGENT_LINK_DIR/git-hooks"
+current_hooks_path=$(git config --global --get core.hooksPath || true)
+if [ -z "$current_hooks_path" ] || [ "$current_hooks_path" = "$HOOKS_DIR" ]; then
+  git config --global core.hooksPath "$HOOKS_DIR"
+  echo -e "  ${GREEN}SET${NC}     core.hooksPath -> $HOOKS_DIR"
+else
+  echo -e "  ${YELLOW}SKIP${NC}    core.hooksPath already set to $current_hooks_path"
+fi
+# agent-link itself is committed and pushed straight to main.
+git -C "$AGENT_LINK_DIR" config agentlink.allowMain true
+echo -e "  ${GREEN}SET${NC}     agentlink.allowMain=true (this repo only)"
+
 echo ""
 echo "Done."
