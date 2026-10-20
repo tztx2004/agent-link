@@ -6,6 +6,8 @@ occurrences: 1
 created: 2026-07-22
 scope: universal
 status: active
+verdict: helped
+confidence: medium
 ---
 
 ## Symptom (What went wrong)
@@ -15,6 +17,8 @@ The orchestrator created a docs-maintenance commit (5cef224, "SPEC: docs 인덱�
 ## Correct approach
 
 Commit Governance covers the target branch, not just the message/content. Immediately before executing `git commit`, run `git branch --show-current` (or equivalent) and check it against the repo's default branch (`main`/`master`). If on the default branch, create and switch to a task/feature branch first — do this even when the user has already approved the commit message and diff, since that approval does not cover the branch target. This is a distinct check from message/content approval and must not be skipped because content was approved. When a project's own convention doc (e.g. `docs/conventions.md`) states a no-direct-main-commit rule, that project rule additionally governs and must be honored.
+
+> 💡 **Repository Override Exception**: Repositories with explicit local instructions (e.g., `AGENTS.md` / `CLAUDE.md` in personal dotfiles/config repos like `agent-link`) that permit direct `main` commits take precedence under the "Local Rules First" principle.
 
 ## When to apply
 

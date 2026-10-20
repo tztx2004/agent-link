@@ -6,6 +6,8 @@ occurrences: 1
 created: 2026-06-18
 scope: universal
 status: active
+verdict: helped
+confidence: medium
 ---
 
 > 💡 **2026-09 개정 (Harness Diet)**: `verification.md` §1이 개정되어, 순수 Q&A, 조사, 기획 등 코드 비수정 대화 턴은 `[Self-Audit]` 블록 출력이 면제됩니다. 본 레슨의 '출력 단위 적용' 원칙은 **코드/설정 수정이 포함된 산출물 턴 및 핸드오프**에 적용됩니다.

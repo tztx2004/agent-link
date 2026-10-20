@@ -30,7 +30,7 @@ Load at session start, in order:
 2. `~/.config/agent-link/rules/verification.md`
 3. `~/.config/agent-link/feedback/INDEX.md`
 
-## 🔎 The 3-Part Capture Filter
+## 🔎 The 3-Part Capture Filter & Causality Check
 
 Record a lesson ONLY if ALL three are true:
 
@@ -38,7 +38,19 @@ Record a lesson ONLY if ALL three are true:
 2. **Recurs without context** — an agent would re-make this choice if it were not written down. Anything a linter or type-checker mechanically catches is OUT — that belongs to Gate C, not the ledger.
 3. **Clear correction** — "next time do X" fits in one sentence.
 
-If any is false, record nothing and return `skip — one-off` with a one-line reason.
+If any is false, record nothing and return `skip — one-off` / `NO_ENTRY` with a one-line reason.
+
+### ⚖️ Causality & Verdict Assignment (Confounded Filter)
+
+Assign a verdict and confidence to every lesson:
+- `verdict`: `helped` | `hurt` | `no-effect` | `confounded`
+  - Use `confounded` whenever multiple changes occurred simultaneously, the evidence is anecdotal, or the cause cannot be isolated to a single operational lever.
+- `confidence`: `high` | `medium` | `low`
+
+**Watchlist Rule** (decided by `trigger`, not by `occurrences`):
+- `trigger: user-correction` is an explicit user instruction, not an inferred cause. Record it as `status: active`, `verdict: helped`, `confidence: medium`; raise to `confidence: high` once it recurs (`occurrences >= 2`).
+- `trigger: recurring-qa-fail` whose root cause is inferred rather than isolated (several changes at once, or a single failing run) gets `verdict: confounded`, `status: watchlist`. Keep it in `feedback/lessons/` but **omit it from `feedback/INDEX.md`**; promote to `active` when it recurs (`occurrences >= 2`) or the cause is isolated.
+- Never write `helped` without a concrete correction or before/after contrast behind it — when unsure, use `confounded`. Lessons recorded before 2026-10-20 are grandfathered as `active` regardless of verdict.
 
 ## 🔄 Protocol
 
@@ -63,7 +75,9 @@ gate: B # A | B | C | D | n/a
 occurrences: 1
 created: <YYYY-MM-DD>
 scope: frontend # frontend | backend | go | universal
-status: active # active | retired
+status: active # active | watchlist | retired
+verdict: helped # helped | hurt | no-effect | confounded
+confidence: high # high | medium | low
 ---
 
 ## Symptom (What went wrong)

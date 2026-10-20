@@ -115,11 +115,25 @@ for skill in "$AGENT_LINK_DIR/.agents/skills"/*; do
 done
 prune_orphaned_links "$GEMINI_DIR/skills" "$AGENT_LINK_DIR/.agents/skills"
 
-echo "==> [Gemini/Antigravity] Linking rules..."
+echo "==> [Gemini/Antigravity] Linking core rules (Harness Diet)..."
 mkdir -p "$GEMINI_DIR/rules"
-for rule in "$AGENT_LINK_DIR/rules"/*.md; do
+CORE_RULES=("core_rules.md" "thinking_model.md" "verification.md")
+for rule_name in "${CORE_RULES[@]}"; do
+  rule="$AGENT_LINK_DIR/rules/$rule_name"
   [ -e "$rule" ] || continue
-  link "$rule" "$GEMINI_DIR/rules/$(basename "$rule")"
+  link "$rule" "$GEMINI_DIR/rules/$rule_name"
+done
+
+# Prune non-core domain rules from global always-on (they stay reachable via the trigger lines in core_rules.md)
+# Only links pointing into this repo's rules/ are touched; rules linked from elsewhere are left alone.
+for existing_link in "$GEMINI_DIR/rules"/*.md; do
+  [ -L "$existing_link" ] || continue
+  [[ "$(readlink "$existing_link")" == "$AGENT_LINK_DIR/rules/"* ]] || continue
+  local_name=$(basename "$existing_link")
+  if [[ ! " ${CORE_RULES[*]} " =~ " ${local_name} " ]]; then
+    echo -e "  ${YELLOW}PRUNE-DIET${NC} $local_name (demoted from global always-on to on-demand)"
+    rm -f "$existing_link"
+  fi
 done
 prune_orphaned_links "$GEMINI_DIR/rules" "$AGENT_LINK_DIR/rules"
 

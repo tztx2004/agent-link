@@ -27,6 +27,7 @@
 - **Rendering model (default — Next.js / RSC)**: prefer Server Components; drop to Client Components (`'use client'`) only at the leaves.
   - **SPA exception (Vite / CRA)**: every component is a client component. Server Components, Server Actions, and `loading.tsx` do not exist — use the project's data-fetching + `Suspense`/`ErrorBoundary` conventions instead.
 - **Go Standards**: When touching Go code (`*.go`), apply `~/.config/agent-link/rules/golang_standards.md` (`golang-patterns`, `golang-pro`, `golang-testing`).
+- **React / UI Standards**: When touching React/TSX components or styles, apply `~/.config/agent-link/rules/react_patterns.md` and `~/.config/agent-link/rules/style_guidelines.md`; when writing API calls or server state, apply `~/.config/agent-link/rules/tanstack_query.md`.
 - **Linting & Formatting**: Follow local configurations.
 
 ## 5. Final Reporting (Human-Facing)

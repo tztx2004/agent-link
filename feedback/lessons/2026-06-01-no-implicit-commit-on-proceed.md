@@ -6,6 +6,8 @@ occurrences: 2
 created: 2026-06-01
 scope: universal
 status: active
+verdict: helped
+confidence: high
 ---
 
 ## Symptom (What went wrong)

@@ -3,7 +3,10 @@
 > High-density summary of active lessons learned from past mistakes.
 > Format: `- [title](lessons/<file>.md) — [scope] actionable rule`
 > `scope`: frontend | backend | go | universal.
+> `verdict` lives in each lesson's frontmatter: helped (backed by an explicit correction or before/after contrast) | confounded (cause inferred, not isolated). New `confounded` lessons go to `status: watchlist` and stay out of this index; lessons recorded before 2026-10-20 are grandfathered as active.
 > When performing work in a relevant domain, follow these core guidelines. Full lesson bodies in `lessons/<file>.md` can be consulted on-demand for deep context.
+
+## Active Lessons
 
 - [Don't expand implementation approval into commit consent](lessons/2026-06-01-no-implicit-commit-on-proceed.md) — universal; "진행"/"proceed" grants code changes only; git commit·push only on explicit instruction
 - [Lockfile-aware sweep glob for rename/identifier-migration tasks](lessons/2026-06-04-lockfile-aware-rename-sweep.md) — universal; enumerate all \*.lock files before delegation and include them in sweep grep glob
@@ -15,4 +18,4 @@
 - [Governing rule change requires existing-code sweep](lessons/2026-06-17-governing-rule-change-requires-code-sweep.md) — universal; adding or strengthening a rule in any governing doc requires sweeping all code under that rule's scope; Gate C evidence must be "zero violations in sweep," not "formatter passed"
 - [Self-audit is per-output, not per-session](lessons/2026-06-18-self-audit-per-output-not-per-session.md) — universal; emit [Self-Audit] block at bottom of code-modifying responses; pure Q&A and research turns are exempt
 - [Docs-first workflow must precede implementation delegation](lessons/2026-07-22-docs-first-workflow-before-implementation.md) — universal; check AGENTS.md/CLAUDE.md for a docs-before-code order before delegating; write/confirm the Task doc first when the project mandates it
-- [Verify target branch before commit — never commit directly to main](lessons/2026-07-22-verify-branch-before-commit.md) — universal; commit governance covers branch target too, not just message/content; check current branch and branch off default before `git commit`
+- [Verify target branch before commit — never commit directly to main](lessons/2026-07-22-verify-branch-before-commit.md) — universal; commit governance covers branch target too, not just message/content; check current branch and branch off default before `git commit` (exempt when local AGENTS.md allows main)

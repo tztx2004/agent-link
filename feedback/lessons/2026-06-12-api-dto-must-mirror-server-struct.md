@@ -6,6 +6,8 @@ occurrences: 1
 created: 2026-06-12
 scope: frontend
 status: active
+verdict: helped
+confidence: medium
 ---
 
 ## Symptom (What went wrong)
