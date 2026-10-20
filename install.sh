@@ -64,6 +64,9 @@ prune_orphaned_links() {
   done
 }
 
+echo "==> [Claude] Linking global instructions..."
+link "$AGENT_LINK_DIR/claude/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+
 echo "==> [Claude] Linking agents..."
 mkdir -p "$CLAUDE_DIR/agents"
 for agent in "$AGENT_LINK_DIR/agents"/*.md; do
@@ -98,6 +101,9 @@ for agent in "$AGENT_LINK_DIR/codex-agents"/*.toml; do
   link "$agent" "$CODEX_DIR/agents/$(basename "$agent")"
 done
 prune_orphaned_links "$CODEX_DIR/agents" "$AGENT_LINK_DIR/codex-agents"
+
+echo "==> [Gemini/Antigravity] Linking global instructions..."
+link "$AGENT_LINK_DIR/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
 
 echo "==> [Gemini/Antigravity] Linking agents..."
 mkdir -p "$GEMINI_DIR/agents"
