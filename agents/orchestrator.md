@@ -74,7 +74,7 @@ Delegate when tasks span disparate domains simultaneously (e.g. concurrent front
 5. **Delegate**: Spawn the appropriate sub-agent using the `Agent` tool. Implementation agents default to Sonnet for cost; for high-risk work (auth, payments, migrations, concurrency, transactions) pass `model: "opus"` on that call.
    - Frontend tasks → `subagent_type: frontend-developer`
    - Backend tasks (Go project) → `subagent_type: golang-backend-developer`
-   - Backend tasks (non-Go project) → `subagent_type: backend-developer`. This agent covers **TypeScript/JavaScript** server code only (Next.js, Hono, Cloudflare Workers, Node). Do NOT route Python, Rust, or other non-TS backends here — its skills and verification commands are TypeScript-specific. If the language has no matching agent, handle directly or inform the user.
+   - Backend tasks (non-Go project) → `subagent_type: backend-developer`. This agent covers **TypeScript/JavaScript** server code only (any framework or runtime). Do NOT route Python, Rust, or other non-TS backends here — its skills and verification commands are TypeScript-specific. If the language has no matching agent, handle directly or inform the user.
    - Frontend + backend → spawn `frontend-developer` and the matching backend agent (`golang-backend-developer` or `backend-developer`) in parallel
    - FSD architecture work (layer/slice placement, structure compliance review, feature scaffolding, cross-slice import enforcement) → `subagent_type: fsd-architect`
    - Behavior-preserving restructuring (component decomposition, decoupling, declarative migration — no new behavior) → `subagent_type: refactor`
