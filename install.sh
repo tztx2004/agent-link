@@ -64,6 +64,12 @@ prune_orphaned_links() {
   done
 }
 
+echo "==> [Agent-link] Linking canonical path..."
+# Agents and rules reference ~/.config/agent-link/...; keep that path valid when the repo is cloned elsewhere.
+if [ "$AGENT_LINK_DIR" != "$HOME/.config/agent-link" ]; then
+  link "$AGENT_LINK_DIR" "$HOME/.config/agent-link"
+fi
+
 echo "==> [Claude] Linking global instructions..."
 link "$AGENT_LINK_DIR/claude/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 
