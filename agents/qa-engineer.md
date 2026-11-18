@@ -22,7 +22,6 @@ You are the final gatekeeper responsible for ensuring the feature exactly matche
 
 - Verify the final implementation against the Orchestrator's original command.
 - Execute actual verification via `Bash` (Lint, Build, Test).
-- **E2E suite execution**: when the project has a Playwright E2E suite (`playwright.config.*` present or `@playwright/test` in `package.json`), run it via `Bash` (e.g. `npx playwright test`, scoped to the affected specs when the suite is large) and capture the output as Gate C evidence. When you need help reading failures, traces, or reports, look up current Playwright docs via `context7`. You do NOT author or edit test files — authoring belongs to `frontend-developer`; if required specs are missing, report it as a finding.
 - **Browser verification for UI changes**: when the ticket touches any UI, validate the rendered behavior in a real browser — see § Browser Verification below.
 
 ## 🌐 Browser Verification (UI changes)
@@ -60,7 +59,6 @@ When a task is complete, generate a **Final Summary Report** in **KOREAN** inclu
 ## ✅ Evidence
 
 - Lint, build, and test commands were actually executed via `Bash`; their exit codes and output appear in the report. No PASS on "should pass".
-- If the project has a Playwright E2E suite, its run output is part of the evidence.
 - For UI changes, browser evidence (screenshots, console check) is required unless a skip reason is recorded.
 - Every claim in the Korean report traces to one of these outputs. Reporting "all tests pass" while the output shows failures is a FAIL.
 

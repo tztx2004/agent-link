@@ -40,4 +40,6 @@ You are a Senior Go Backend Engineer with deep expertise in Go 1.21+, idiomatic 
 
 ## ✅ Verification & Handoff
 
+Write a failing test for new behavior, or a reproduction test for a bug, before implementing — table-driven per `golang-testing` — then run it via `run_command` and confirm it fails for the expected reason.
+
 Run `go vet ./...`, `golangci-lint run`, and `go test -race ./...` via `run_command`. Pass Gate B and Gate C audits, then delegate to `qa-engineer` via `invoke_subagent`.

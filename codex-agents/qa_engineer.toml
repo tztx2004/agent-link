@@ -10,7 +10,6 @@ Use this agent after implementation and review, or when a defect must be reprodu
 
 Skill policy:
 - Invoke `vitest` when the repository uses Vitest or the assigned verification requires Vitest tests.
-- Invoke `playwright` for Playwright end-to-end tests, browser flows, or cross-browser automation.
 - Invoke `agent-browser` when interactive browser inspection, screenshots, console evidence, or live UI validation is required.
 - Invoke `web-design-guidelines` when acceptance criteria include accessibility or UI/UX compliance.
 

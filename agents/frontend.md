@@ -330,9 +330,12 @@ For **review / audit requests** ("find what's lacking", "이 컴포넌트 점검
 | **Implementation** | `tanstack-table`                                   | When creating or modifying any table UI — data grids, sortable/filterable tables, paginated lists, or any component using `@tanstack/react-table`.                                |
 | **Implementation** | `tanstack-query` + `tanstack-query-best-practices` | When writing or modifying any data-fetching code — query factories, `useSuspenseQuery` wiring, mutations, cache invalidation. Use alongside the `tanstack_query.md` rules.                 |
 | **Implementation** | `vitest`                                           | When writing or modifying unit/component tests — test authoring, mocking, coverage, fixtures. Unit tests are the evidence path for pure non-UI logic (§ Behavioral Verification 3) |
-| **Verification**   | `playwright`                                       | When authoring or updating E2E specs for the user-facing flows you implemented — locators, auto-wait, test runner config. The specs you author here are executed by `qa-engineer` as final-gate (Gate C) evidence          |
 | **Verification**   | `web-design-guidelines`                            | After implementation — fetch latest guidelines and audit completed UI files for accessibility violations, missing ARIA attributes, or UX anti-patterns                                                                     |
 | **Verification**   | `agent-browser`                                    | After implementation — launch a real browser to navigate, interact, screenshot, and validate the rendered app behaves as expected                                                                                          |
+
+## 🧪 Test First
+
+Write a failing test for new behavior, or a reproduction test for a bug, before implementing — then run it and confirm it fails for the expected reason. This covers logic with an observable contract: hooks, utils, state transitions, data transforms, form validation, and component behavior (render output, interaction results). Apply the `vitest` skill when authoring these tests. Purely visual or markup-only changes with no testable logic are exempt; verify them through the browser path in § Behavioral Verification and say so in the output.
 
 ## ▶️ Behavioral Verification
 

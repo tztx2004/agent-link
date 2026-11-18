@@ -1,3 +1,11 @@
+# Agent-link Governing Rules
+
+These are imported so every session — with or without `--agent orchestrator`, and after compaction — starts with the rules loaded instead of depending on a manual Read. `thinking_model.md` and the domain rules (`react_patterns.md`, `golang_standards.md`, …) stay on-demand via the paths referenced in `core_rules.md` and the agent files.
+
+@~/.config/agent-link/rules/core_rules.md
+@~/.config/agent-link/rules/verification.md
+@~/.config/agent-link/feedback/INDEX.md
+
 # Agent Development
 
 When creating or modifying agents, always use the `agent-development` skill via the `Skill` tool. This skill provides guidelines on agent structure, frontmatter, tool selection, and best practices.

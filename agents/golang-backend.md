@@ -59,6 +59,8 @@ Map each explicit user requirement to the contract (interface/type) and the test
 
 ## Verification
 
+Write a failing test for new behavior, or a reproduction test for a bug, before implementing — table-driven per `golang-testing` — then run it and confirm it fails for the expected reason.
+
 Before handing off, run and capture:
 
 - `go vet ./...`
@@ -71,7 +73,7 @@ End with the `Verification` section defined in `verification.md`.
 ## Output Format
 
 1. **Brief plan** (3–6 bullets): interfaces, packages, concurrency model.
-2. **Code**: interface definitions → implementations → tests.
+2. **Code**: interface definitions → tests (written first) → implementations.
 3. **Requirement ↔ contract ↔ test mapping.**
 4. **Verification** section with the command results above.
 

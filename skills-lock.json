@@ -7,6 +7,13 @@
       "skillPath": "skills/agent-browser/SKILL.md",
       "computedHash": ""
     },
+    "agent-development": {
+      "source": "anthropics/claude-plugins-official",
+      "commit": "e6143c9807a001832badb63e89d58ffe25d542ec",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/agent-development/SKILL.md",
+      "computedHash": "c25eb9063fba04a87d031674de81fef8d800fc2d2fcbaa1cad61aa43070a0713"
+    },
     "api-and-interface-design": {
       "source": "addyosmani/agent-skills",
       "sourceType": "github",
@@ -68,9 +75,10 @@
     },
     "documentation-and-adrs": {
       "source": "addyosmani/agent-skills",
+      "commit": "39b723ceebf81474d0557c1fecd01eddab585563",
       "sourceType": "github",
       "skillPath": "skills/documentation-and-adrs/SKILL.md",
-      "computedHash": ""
+      "computedHash": "deb39d7c8157563bc14a48f0d22003c82f4d8370b69c96efde476fe12318d188"
     },
     "docx": {
       "source": "anthropics/skills",
@@ -162,12 +170,6 @@
       "skillPath": "devops-skills-plugin/skills/k8s-yaml-validator/SKILL.md",
       "computedHash": ""
     },
-    "playwright": {
-      "source": "bobmatnyc/claude-mpm-skills",
-      "sourceType": "github",
-      "skillPath": "toolchains/javascript/testing/playwright/SKILL.md",
-      "computedHash": ""
-    },
     "predictability": {
       "source": "toss/frontend-fundamentals",
       "sourceType": "github",
@@ -199,9 +201,10 @@
     },
     "spec-driven-development": {
       "source": "addyosmani/agent-skills",
+      "commit": "39b723ceebf81474d0557c1fecd01eddab585563",
       "sourceType": "github",
       "skillPath": "skills/spec-driven-development/SKILL.md",
-      "computedHash": ""
+      "computedHash": "504a76654a492c1ec1fa0e1c59387b8b2969fe2319191cd298c4e3482cf2582a"
     },
     "tanstack-query": {
       "source": "tanstack-skills/tanstack-skills",
@@ -247,9 +250,10 @@
     },
     "vitest": {
       "source": "antfu/skills",
+      "commit": "4a6bb39e7b45e26402eb215393c51ccf5df1ca4c",
       "sourceType": "github",
       "skillPath": "skills/vitest/SKILL.md",
-      "computedHash": ""
+      "computedHash": "bd95e41d66d76da9008893c9bc48c30f0a68f352cd2b00017767f5e4c129501d"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",

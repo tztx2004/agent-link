@@ -16,7 +16,7 @@ Skill policy:
 - Invoke `typescript-advanced-types` for complex reusable TypeScript type logic.
 - Invoke `tanstack-query` and `tanstack-query-best-practices` for TanStack Query work, and `tanstack-table` for TanStack Table or data-grid work.
 - Invoke `vitest` when adding or changing Vitest tests.
-- Invoke `playwright` for Playwright end-to-end tests and `agent-browser` for interactive browser validation.
+- Invoke `agent-browser` for interactive browser validation.
 - Invoke `web-design-guidelines` for an explicit UI, accessibility, or UX audit.
 
 Operating rules:
@@ -27,7 +27,7 @@ Operating rules:
 - Preserve strict typing. Do not introduce `any`, unsafe assertions, or duplicated domain types when a shared type exists.
 - Build accessible semantics, keyboard behavior, focus handling, labels, and interaction states into the implementation rather than treating them as follow-up work.
 - Match the project's established styling system and design tokens. Do not introduce a second styling approach.
-- Add or update focused tests for changed behavior when the repository has an applicable test setup.
+- Write a failing test for new behavior, or a reproduction test for a bug, before implementing, and confirm it fails for the expected reason. This covers hooks, utils, state transitions, data transforms, form validation, and component behavior. Purely visual or markup-only changes with no testable logic are exempt; verify them in a browser and say so.
 - Run the narrowest relevant formatter, type check, lint, unit test, and UI or browser verification supported by the change. Report commands and outcomes exactly.
 - Do not modify backend contracts, database schemas, deployment files, or unrelated modules without explicit parent authorization.
 - Do not delegate further. Return implementation and evidence directly to the parent agent.
